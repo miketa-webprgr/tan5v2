@@ -1,0 +1,41 @@
+<div id="config-window" class="modal">
+  <div class="modal__bg modal-close"></div>
+  <div class="modal__content">
+    <div id="tango-config">
+      <h3> 単語帳設定 </h3>
+      <input type="hidden" id="tango_config_wordnote_id">
+      <%= hidden_field_tag :current_user_id, @current_user.id %> 
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <div>
+          <%= label_tag :sort, "並び順" %>
+          <%= select_tag :sort, options_for_select([["昇順","asc"],["降順","desc"],["ランダム","random"]]),class: "config-item" %> 
+          </div>
+          <div>
+          <%= label_tag :continue, "前回の続きから" %>
+          <%= check_box_tag :continue, false, nil,{class: "config-item"} %>
+          </div>
+          <div>
+          <%= label_tag :filter, "フィルター" %>
+          <%= select_tag :filter, options_for_select([["off","0"],["星1以上","1"],["星2以上","2"],["星3以上","3"],["星4以上","4"],["星5以上","5"]]), class: "config-item" %>
+          </div>
+          <div>
+          <%= label_tag :font_size, "文字サイズ" %>
+          <%= select_tag :font_size, options_for_select(%w(10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48 50 52 54 56 58 60 62 64)), class: "config-item" %>
+          </div>
+          <div>
+          <%= label_tag :timer, "自動再生間隔" %>
+          <%= select_tag :timer, options_for_select([["off","0"],["1","1"] ,["2","2"] ,["3","3"] ,["4","4"] ,["5","5"] ,["6","6"] ,["7","7"] ,["8","8"] ,["9","9"]]), class: "config-item" %>
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <p id="character-size-preview">文字サイズ Size</p>
+        </div>
+      </div>
+  
+  
+      <div><span class="btn btn-info modal-close">閉じる</span></div>
+    </div>
+  </div>
+</div>
+

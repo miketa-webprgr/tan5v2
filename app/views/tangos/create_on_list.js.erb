@@ -1,0 +1,8 @@
+$('#flash-message').html('<span class="alert alert-success">単語を更新しました</span>').hide().slideDown(500);
+$(function(){
+  setTimeout("$('.alert.alert-success').fadeOut('slow')", 2000);
+});
+
+$('[id*="tango-no-"]').last().after('<tr id="tango-no-' + <%= @tango.id %> + '"><td>xxx</td></tr>');
+$('#tango-no-' + <%= @tango.id %>).html('<%=j render partial: "tangos/tangoitem",locals: {tango: @tango, index: @tango.id}, wordnote: @wordnote %>').hide().fadeIn(1000);
+$('#create-new-tango > td').find('textarea').val("");

@@ -1,0 +1,10 @@
+@import "colors";
+
+nav.pagination {
+  margin: 5 0;
+  padding: 5 0;
+  display: inline-block;
+  border-top: solid $light_gray 1px;
+  border-bottom: solid $light_gray 1px;
+}
+

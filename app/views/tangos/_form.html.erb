@@ -1,0 +1,20 @@
+<%= form_with model: tango, method: "post", url: user_wordnote_tangos_path(user_id: current_user.id, wordnote_id: 0) do |f| %>
+  <% if wordnotes.size > 0 %>
+    <div class="row">
+      <h3 class="col-5">単語を登録</h3>
+      <div id="select-wordnote" class="col-7">
+        <%= f.select :wordnote_id, wordnotes.map{|d| [d.name + " : " + d.subject, d.id]},required: true  %>
+      </div>
+    </div>
+    <div>
+      <%= f.text_area :question, required: true, value: nil, placeholder: "問題(必須)" %>
+    </div>
+    <div>
+      <%= f.text_area :answer, required: true , value: nil, placeholder: "答え(必須)" %>
+    </div>
+    <div>
+      <%= f.text_area :hint, value: nil, placeholder: "ヒント (任意)" %>
+    </div>
+    <%= f.submit "単語を登録", class: "btn btn-primary" %>
+  <% end %>
+<% end %>

@@ -1,0 +1,10 @@
+<% @title = "新規登録" %>
+<h1><%= @title %></h1>
+
+<div id="input-form">
+ <%= form_with model: @user, url: [ @user] do |f| %>
+   <%= render "form", f: f %>
+     <%= f.submit "登録", class: "btn btn-primary" %>
+     <%= link_to "キャンセル", :root, class: "btn btn-default"  %>
+ <% end %>
+</div>

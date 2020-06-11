@@ -1,0 +1,30 @@
+<table class="table">
+  <tr>
+    <th> 単語帳名前 </th>
+    <th> タイプ </th>
+    <th> 単語数 </th>
+    <th> 設定 </th>
+    <th> 編集 </th>
+    <th> 更新日 </th>
+    <th> 削除 </th>
+  </tr>
+  <% @wordnotes.each do |wordnote| %>
+    <% if wordnote.is_open == true || @current_user.id == wordnote.user_id %>
+    <tr id="wordnote-no-<%= wordnote.id %>">
+      <td <%= 'class=not-open' if wordnote.is_open == false %>> <%= link_to wordnote.name, user_wordnote_url(user_id: user.id, id: wordnote.id) %> </td>
+      <td> <%= wordnote.subject  %> </td>
+      <td> <%= wordnote.tangos.all.size  %> </td>
+      <td> <button class="btn " id="config-no-<%= wordnote.id %>"><i class="fa fa-cog"></i></button> 
+      <%= render partial: "tango_configs/hidden_tags", locals: {wordnote: wordnote} %>
+      </td>
+      <td> <button class="btn " id="edit-no-<%= wordnote.id %>"><i class="fa fa-book"></i></button> 
+      <%= render partial: "wordnotes/hidden_tags", locals: {wordnote: wordnote} %>
+      </td>
+      <% last_update = wordnote.tangos.last ? wordnote.tangos.last.updated_at : wordnote.updated_at %>
+      <td> <%= last_update.to_s.split(" +").first %> </td>
+      <td> <%= link_to "削除",user_wordnote_url(user_id: user.id, id: wordnote.id) , method: :delete , data: {confirm: "本当に削除しますか？"}, remote: true %></td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
+

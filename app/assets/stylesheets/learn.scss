@@ -1,0 +1,64 @@
+@import "colors";
+
+div#wrapper {
+  div#container {
+    table#questions {
+        //display: none;
+    }
+    .hidden{
+      display:none;
+    }
+    div#learn-operation{
+      .icon{
+        font-size:3em;
+      }
+    }
+    div#show-tangos{
+      background-color: white;
+      width:100%;
+      text-align:center;
+      margin:5px;
+      border-radius: 10px;
+    }
+    div#learn-wrapper{
+      width:100%;
+      margin: 0 auto;
+      padding: 10px;
+      font-size: 20px;
+      height:100%;
+      div#question, div#answer{
+        width: 100%;
+        padding: 10px;
+        min-height: 200px;
+        background-color: #eeffee;
+      }
+      div#answer{
+        background-color: #eeeeff;
+      }
+    }
+    .modal{
+      display: none;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      #hint-text{font-size: x-large;}
+      p {margin:20px 0px;}
+    }
+    .modal__bg{
+      background: rgba(0,0,0,0.8);
+      height: 100vh;
+      position: absolute;
+      width: 100%;
+    }
+    .modal__content{
+      background: white;
+      left: 50%;
+      padding: 40px;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: 60%;
+    }
+  }
+}

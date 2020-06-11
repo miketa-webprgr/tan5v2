@@ -1,0 +1,13 @@
+
+      <td><button type="button" class="new-btn btn btn-primary">new</button></td>
+      <td></td>
+      <td class='question'><textarea class="hidden tango[question]" style="width:100%"></textarea></td>
+      <td class='answer'><textarea class="hidden tango[answer]" style="width:100%"></textarea></td>
+      <td class='hint'><textarea class="hidden tango[hint]" style="width:100%"></textarea></td>
+      <td class='updated_at'></span>
+      <%= form_with model: Tango, method: :post,url: user_wordnote_create_on_list_path(user_id: @current_user, wordnote_id: @wordnote.id) do |f| %>
+      <%= f.hidden_field :question %>
+      <%= f.hidden_field :answer %>
+      <%= f.hidden_field :hint %>
+      <%= f.submit "create", class: "create-btn btn-primary hidden" %>
+      <% end %><button type="button" class="create-cancel-btn btn-default hidden">キャンセル</button></td>

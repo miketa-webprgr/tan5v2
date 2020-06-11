@@ -1,0 +1,17 @@
+<% @title = "tan5にログイン" %>
+<h1 class="login-input-form"><%= @title %></h1>
+<div id="login-input-form">
+  <%= form_with model: @form, url: :session, local: true,data: {remote: false} do |f| %>
+    <div>
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.text_field :email, autocapitalize: "none", autocomplete: "on", autocorrect:"off" %>
+    </div>
+    <div>
+      <%= f.label :password, "パスワード" %>
+      <%= f.password_field :password, autocapitalize: "none", autocomplete: "on", autocorrect:"off" %>
+    </div>
+    <div>
+      <%= f.submit "ログイン", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

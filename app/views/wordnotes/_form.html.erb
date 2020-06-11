@@ -1,0 +1,16 @@
+<%= form_with model: wordnotes, method: "post", url: user_wordnotes_path(user_id: current_user.id) do |f| %>
+<h3>単語帳を作成する</h3>
+<div id="wordnote-open" >
+  <%= f.label :is_open, "公開する(任意)" %>
+  <%= f.check_box :is_open , {:checked => true} %>
+</div>
+<div class="">
+  <div id="wordnote-name" >
+    <%= f.text_field :name,  required: true, value: nil, placeholder: "単語帳の名前(必須)" %>
+  </div>
+  <div id="wordnote-subject" >
+    <%= f.text_field :subject, required: true , value: nil, placeholder: "科目(必須)" %>
+  </div>
+    <%= f.submit "登録", class: "btn btn-primary" %>
+</div>
+<% end %>

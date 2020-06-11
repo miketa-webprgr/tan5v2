@@ -1,0 +1,5 @@
+$('#flash-message').html('<span class="alert alert-success"><%= @tango_name %>の単語帳を削除しました</span>').hide().fadeIn(500);
+$(function(){
+  setTimeout("$('.alert.alert-success').fadeOut('slow')",2000);
+});
+$('#categories').html('<%=j render partial: "/tangos/categories", locals: { classified_tango: @classified_tango, user: @user} %>').hide().fadeIn(1000);

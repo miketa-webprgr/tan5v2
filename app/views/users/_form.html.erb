@@ -1,0 +1,29 @@
+<div class="notes">
+  <span class="mark">*</span> 印がついた項目は入力必須です。
+</div>
+<div>
+  <%= f.label :email, "メールアドレス", class: "required" %>
+  <%= f.email_field :email, size: 32, required: true %>
+</div>
+<div>
+  <%= f.label :password, "パスワード", class: "required" %>
+  <%= f.password_field :password, size: 32, required: true %>
+</div>
+<div>
+  <%= f.label :name, "アカウント名", class: "required" %>
+  <%= f.text_field :name, required: true %>
+</div>
+<div>
+  <%= f.label :profile, "自己紹介" %>
+  <%= f.text_area :profile %>
+</div>
+<div>
+  <%= f.label :profile_image, "アイコン" %>
+  <%= f.file_field :profile_image, accept: 'image/jpeg,image/gif,image/png' %>
+</div>
+<% if @current_user.admin? %>
+<div>
+  <%= f.label :suspended, "アカウント無効化" %>
+  <%= f.check_box :suspended %>
+</div>
+<% end %>

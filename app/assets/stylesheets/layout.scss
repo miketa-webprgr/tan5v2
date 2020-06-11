@@ -1,0 +1,56 @@
+@import "colors";
+
+html,body{ margin:0; padding:0; height: 100%;}
+header { 
+  padding: 10px;
+  background-color: $middle_blue;
+  color: $light_gray;
+  span.logo { font-weight: bold;
+  }
+  a { text-decoration: none; }
+  a.login-button { float: right; color: $light_gray;}
+  a.logo { color: $light_gray; font-weight: bold;}
+  form{ display: inline}
+  #search_word{ 
+    border-radius: 20px;
+    float: right;
+    padding-left: 10px;
+    padding-right: 30px;
+    color: #666;
+    border:none
+  }
+  input::placeholder{
+    font-size: large;
+    color: #ccc;
+  }
+  h1{
+    font-size: small;
+    display: inline;
+  }
+  
+}
+
+.alert { width: 100%; display:block;}
+#flash-message{position: fixed; z-index: 100;}
+
+footer { 
+  bottom: 0;
+  width: 100%;
+  background-color: $dark_gray;
+  color: $light_gray;
+  p {
+    text-align: center;
+    padding:5px;
+    margin:0;
+  }
+}
+
+div#wrapper {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding-bottom: 48px;
+  background-color: #fafafa;
+  min-height: 100%;
+  color: $very_dark_gray;
+}

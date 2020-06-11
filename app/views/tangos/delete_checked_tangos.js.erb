@@ -1,0 +1,11 @@
+$('#delete-btn').find('[name="tangos[]"]').remove();
+$('#flash-message').html('<span class="alert alert-success">単語を削除しました</span>').hide().slideDown(500);
+$(function(){
+  setTimeout("$('.alert.alert-success').fadeOut('slow')", 2000);
+});
+
+var deletedTangos = JSON.parse(JSON.stringify(<%= @tango_json %>));
+$.each(deletedTangos, function(index,elem){
+  $('#tango-no-' + elem.id).fadeOut("slow").remove();
+});
+

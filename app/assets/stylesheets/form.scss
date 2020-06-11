@@ -1,0 +1,172 @@
+@import "colors";
+
+div.notes { font-size: small;margin:5px 0 5px; display: inline;}
+div#wrapper {
+  div#container {
+    div#input-form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 10px;
+      border: solid 3px #333333;
+      background-color: snow;
+      input.btn-primary{
+        margin: 10px 0;
+      }
+      textarea { width:100%;}
+      label { display: block; padding-top:5px;}
+      label.required:after {
+        content: "*";
+        padding-left: 5px;
+        color: red;
+      }
+    }
+    h1.login-input-form{
+        margin: 40px 0;
+        text-align: center;
+        font-size: 2rem;
+        color: #666;  
+    }
+    div#login-input-form {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 10px;
+      /* border: solid 3px #333333; */
+      background-color: snow;
+      input.btn-primary{
+        border-radius: 10px;
+        color: white;
+        background-color: #8cf;
+        font-size: 25px;
+        height: 2.5em;
+        border-bottom: none;
+      }
+      input {
+        overflow: visible;
+        border: none;
+        width: 100%;
+        font-size: 30px;
+        border-bottom: 3px #ccc solid;
+        margin-bottom: 30px;
+      }
+      label { 
+        padding: 5px;
+        background: white;
+        margin-bottom: 0px;
+        /* border: 1px black solid; */
+        display: block;
+        padding-top: 5px;
+        color: #ccc;
+        font-size: x-large;
+      }
+    }
+  }
+}
+div#tango_register {
+    max-width: 700px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    h3{
+      font-size: 1.5em;
+      color: #666;
+    }
+    input.btn-primary{
+      width: 100%;
+      border-radius: 10px;
+      color: white;
+      background-color: #8cf;
+      border: none;
+      display: block;
+      margin: 0 auto;
+    }
+    #select-wordnote select{
+      font-size: 1.4em;
+      max-width: 100%;
+      background-color: #eee;
+      color: #666;
+      border: 2px #666 solid;
+    }
+    div.notes { font-size: small;margin:5px 0 5px;}
+    textarea::placeholder { 
+      color: #aaa;  
+      padding-left: 5px;
+    }
+    textarea { 
+      border: none;
+      width: 100%;
+      border-bottom: 3px #aaa solid;
+      padding: 15px 0 0px 0;
+      border-bottom: 3px #ccc solid;
+      margin-bottom: 15px;
+      margin-top: 10px;
+      background-color: #eee;
+      font-size: large;
+      color: #666;
+    }
+    label { display: block; padding-top:5px;}
+    label.required:after {
+      content: "*";
+      padding-left: 5px;
+      color: red;
+    }
+  
+}
+div#wordnote_register {
+    max-width: 700px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    h3 {
+      display: inline;
+      font-size: 1.5em;
+      color: #666;
+    }
+    input::placeholder{
+      color: #aaa;  
+      padding-left: 5px;
+    }
+    #wordnote-name, #wordnote-subject{
+      padding: 15px 0 0px 0;
+      border-bottom: 3px #ccc solid;
+      margin-bottom: 15px;
+      margin-top: 10px;
+      background-color: #eee;
+    }
+    input{
+      outline: none  
+    }
+    input#wordnote_subject, input#wordnote_name{
+      width: 95%;
+      border: none;
+      font-size: large;
+      color: #666;
+      background-color: #eee;
+    }
+    #wordnote-open{
+      display: inline;
+      float: right;
+      margin: 0 20px;
+      color: #666;
+    }
+    
+    input.btn-primary{
+      width: 100%;
+      border-radius: 10px;
+      color: white;
+      background-color: #8cf;
+      border: none;
+      display: block;
+      margin: 0 auto;
+    }
+    div.notes { font-size: small;margin:5px 0 5px;}
+    label.required:after {
+      content: "*";
+      padding-left: 5px;
+      color: red;
+    }
+  
+}

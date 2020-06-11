@@ -1,0 +1,34 @@
+<div id="edit-window" class="modal">
+  <div class="modal__bg modal-close"></div>
+  <div class="modal__content">
+    <div id="wordnote-edit">
+      <h3> 単語帳編集 </h3>
+
+      <input id="edit_wordnote_id" type="hidden">
+      <div>
+      <%= label_tag :wordnote_name, "単語帳名前" %>
+      <input id="name" class="edit-item">
+      </div>
+      <div>
+      <%= label_tag :wordnote_subject, "科目" %>
+      <input id="subject" class="edit-item">
+      </div>
+      <div>
+      <%= label_tag :is_open, "公開する" %>
+      <%= check_box_tag :is_open, false, nil,{class: "edit-item"} %>
+      </div>
+      <div>
+        <%= link_to "CSV ダウンロード", user_wordnote_download_csv_path(user_id:0, wordnote_id:0), class: 'download-csv',method: "post" %>
+      </div>
+      <div>
+        <%= form_tag user_wordnote_upload_csv_path(user_id:0, wordnote_id:0), class:'upload-csv', method: "post", multipart: true, remote: true do %>
+          <%= file_field_tag :csv_file, accept: '.csv' %>
+          <%= submit_tag "CSV アップロード" %>
+        <% end %>
+      </div>
+  
+      <div><span class="btn btn-info modal-close">閉じる</span></div>
+    </div>
+  </div>
+</div>
+

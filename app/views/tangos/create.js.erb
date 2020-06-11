@@ -1,0 +1,8 @@
+$('#tango_register').find('textarea').val("");
+$('#flash-message').html('<span class="alert alert-success">単語を登録しました</span>').hide().slideDown(500);
+$(function(){
+  setTimeout("$('.alert.alert-success').fadeOut('slow')", 2000);
+});
+
+$('#categories').html('<%=j render partial: "/wordnotes/list",locals: {wordnotes: @wordnotes, user: @user} %>').hide().fadeIn(1000);
+

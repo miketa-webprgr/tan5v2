@@ -1,0 +1,50 @@
+<% @title = "ユーザー一覧" %>
+<div class="table-wrapper">
+  <div class="user-index-menu">
+    <% if @current_user.admin %>
+      <%= link_to "ユーザー追加", :new_user ,class: "btn btn-info" %>
+    <% end %>
+  </div>
+  <%= paginate @users %>
+
+  <table class="table">
+    <tr>
+      <th>名前</th>
+      <th>プロフィール</th>
+      <th>単語帳</th>
+      <th>登録日</th>
+      <% if @current_user.admin %>
+        <th>email</th>
+        <th>suspended</th>
+        <th>admin</th>
+      <% end %>
+    </tr>
+    <% @users.each do |user| %>
+      <% if @current_user == user %>
+        <tr style="background-color:#eeeeff;">
+      <% else %>
+        <tr>
+      <% end %>
+        <td>
+            <div class="user-index-profile">
+            <%= image_tag user.profile_image.url if user.profile_image? %>
+            <%= image_tag '/uploads/user/profile_image/no_data/no_image.png' if user.profile_image? == false %>
+            <%= link_to user.name, user_path(user) %>
+            </div>
+        </td>
+        <td><%= user.profile %></td>
+        <td><%= user.wordnotes.size %></td>
+        <td><%= user.created_at.to_s.split(" ").first %></td>
+        <% if @current_user.admin %>
+          <td><%= user.email %></td>
+          <th><%= link_to user.suspended.to_s, suspend_user_path(user) %></th>
+          <th><%= user.admin %></th>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @users %>
+</div>
+
+  
+

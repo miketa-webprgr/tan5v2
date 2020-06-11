@@ -1,0 +1,215 @@
+<% @title = @tangos.first.subject + "-" + @tangos.first.name %>
+
+<div id="learn-wrapper">
+  <div id="question"><span id="question-text"></span><span id="hint-text"></span></div>
+  <div id="answer"><span id="answer-text"></span></div>
+
+</div>
+<div id="learn-operation" style="margin: 0 auto; width:100%;">
+  <ul class="list-group list-group-horizontal text-center">
+    <li class="list-group-item flex-fill icon" id="correct-btn">○</li>
+    <li class="list-group-item flex-fill icon" id="hint-btn" >hint</li>
+    <li class="list-group-item flex-fill icon hidden" id="wrong-btn" >✕</li>
+  </ul>
+  <ul class="list-group list-group-horizontal text-center">
+    <li class="list-group-item flex-fill to-10">&lt;&lt;</li>
+    <li class="list-group-item flex-fill to-1" >&lt;</li>
+    <li class="list-group-item flex-fill"><h2 id="tango-number">1</h2></li>
+    <li class="list-group-item flex-fill to+1">&gt;</li>
+    <li class="list-group-item flex-fill to+10">&gt;&gt;</li>
+  </ul>
+</div>
+<div id="show-tangos"> ▽ </div>
+<table class="table hidden" id="questions">
+  <tr><td>
+      <%= form_with model: @tangos, id: "delete-btn", method: :delete,url: user_delete_checked_tangos_path(user_id: @current_user) do |f| %>
+        <%= f.submit "削除", class: "delete-btn btn-danger" %>
+      <% end %>
+  </td></tr>
+  <tr>
+    <th><input type="checkbox" class="delete-check-all">    </th>
+    <th>id</th>
+    <th>question</th>
+    <th>answer</th>
+    <th>hint</th>
+    <th>updated_at</th>
+  </tr>
+  <% @tangos.each_with_index do |tango,index| %>
+    <tr id="tango-no-<%= tango.id.to_s %>">
+    <%= render partial: "tangoitem", locals: {tango: tango, index: index} %>
+    </tr>
+  <% end %>
+</table>
+
+
+<%= javascript_include_tag "learn" %>
+<script>
+ $(function(){
+   var tangoArray = [];
+   var tangoNumber = 1;
+   var tangoData = $('#questions').find('tr');
+   for(let n = 0; n <= tangoData.length ; n++){
+     var ans = tangoData.eq(n).find('td').eq(3).text();
+     var que = tangoData.eq(n).find('td').eq(2).text();
+     var hint = tangoData.eq(n).find('td').eq(4).text();
+     tangoArray.push({answer: ans, question: que, hint: hint});
+   };
+   
+   var questionHtml = $('#question-text');
+   var answerHtml = $('#answer-text');
+   var hintHtml = $('#hint-text');
+   var tangosHtml = $('#questions');
+   var learnHtml = $('#learn-wrapper');
+   var correctBtnHtml = $('#correct-btn');
+   var wrongBtnHtml = $('#wrong-btn');
+   var deleteBtnHtml = $('#delete-btn');
+   var hintBtnHtml = $('#hint-btn');
+   var showAllTangosHtml = $('#show-tangos');
+   var operationHtml = $('#learn-operation');
+   tangoStatus();
+   showAllTangos();
+   setTango();
+   operateStatus();
+
+
+   function tangoStatus(){
+     learnHtml.click(function(){
+       if(answerHtml.attr('class') == 'hidden'){
+         showAnswer();
+       } else if(answerHtml.attr('class') != 'hidden'){
+         changeTangoNumber(1);
+         setTango();
+       };
+     });
+   };
+   function setTango(){
+     $('#tango-number').text(tangoNumber);
+     answerHtml.addClass('hidden'); 
+     hintHtml.addClass('hidden'); 
+     questionHtml.text(tangoArray[tangoNumber].question);
+     answerHtml.text(tangoArray[tangoNumber].answer);
+     hintHtml.text(' ' + tangoArray[tangoNumber].hint);
+     wrongBtnHtml.addClass('hidden');
+     correctBtnHtml.addClass('hidden');
+     hintBtnHtml.removeClass('hidden');
+   }
+   function showAnswer(){
+     answerHtml.removeClass('hidden');
+     wrongBtnHtml.removeClass('hidden');
+     correctBtnHtml.removeClass('hidden');
+     hintBtnHtml.addClass('hidden');
+   }
+   
+   
+   function showAllTangos(){
+     showAllTangosHtml.click(function(){
+       if(tangosHtml.attr('class').match(/hidden/)){
+         tangosHtml.removeClass('hidden');
+         showAllTangosHtml.text('△');
+       } else {
+         tangosHtml.addClass('hidden');
+         showAllTangosHtml.text('▽');
+       };
+     });
+   };
+   function operateStatus(){
+     $(document).on('click',"[id*='tango-no-'] > td",function(){
+       var attr = $(this).attr('class');
+       var value = $(this).text();
+       if (attr.length > 1){
+         $(this).removeClass(attr);
+         if (attr == "updated_at"){
+         }else{
+           $(this).siblings().last().find('[class*="updated-text"]').addClass("hidden");
+           $(this).siblings().last().find('[class*="btn"]').removeClass("hidden");
+           var textarea = jQuery(jQuery.parseHTML('<textarea style="width:100%;"></textarea>')).attr({
+             class: "tango_" + attr,
+             default: value
+           }).val(value);
+           $(this).html(textarea);
+         };
+       };
+     });
+
+     $("[id*='tango-no-']").on('input','textarea',function(){
+       var value = $(this).val();
+       var target = "#" + $(this).attr('class');
+       $(this).parent().siblings().last().find(target).attr({value: value});
+     });
+
+     $("[id*='delete-check-']").on('change',function(){
+       resetDeleteHiddenField();
+     });
+
+     $("tr").on('click',"[class*='update-cancel-btn']",function(){
+       $(this).parent().siblings().children("textarea").each(function(){
+         var value = $(this).attr('default');
+         var attr = $(this).attr("class").split("_").pop();
+         $(this).parent().addClass(attr).html(value);
+       });
+       
+       $(this).parent().find('[class*="updated-text"]').removeClass("hidden");
+       $(this).parent().find('[class*="btn"]').addClass("hidden");
+
+     });
+
+     $("[class*='delete-check-all']").on('change',function(){
+       if ($(this).prop('checked')){
+         $("[id*='delete-check-']").each(function(){
+           $(this).prop('checked', true);
+         });
+       }else{
+         $("[id*='delete-check-']").each(function(){
+           $(this).prop('checked', false);
+         });
+       };
+       resetDeleteHiddenField();
+     });
+
+
+     hintBtnHtml.click(function(){
+       $('#hint-text').removeClass('hidden');
+     });
+
+     $("[class*='to-1']").click(function(){
+        changeTangoNumber(-1);
+        setTango();
+     });
+     $("[class*='to-10']").click(function(){
+        changeTangoNumber(-10);
+        setTango();
+     });
+     $("[class*='to+1']").click(function(){
+        changeTangoNumber(1);
+        setTango();
+     });
+     $("[class*='to+10']").click(function(){
+        changeTangoNumber(10);
+        setTango();
+     });
+   };
+
+   function resetDeleteHiddenField(){
+       var tmp = ""
+       $('input:checked').each(function(){
+         if( $(this).attr("id") === undefined){ return true; };
+         var value = $(this).attr("id").split("-").pop();
+         var id = $(this).attr("id").split("-").pop();
+         tmp += '<input type="hidden" name="tangos[]" value=' + value + '>';
+         console.log(id);
+       });
+       $("[name*='tangos']").remove();
+       tmp = jQuery(jQuery.parseHTML(tmp));
+       deleteBtnHtml.append(tmp);
+   };
+   function changeTangoNumber(num){
+         if(tangoNumber + num >= tangoData.length){
+           tangoNumber = 1;
+          }else if(tangoNumber + num < 1){
+           tangoNumber = tangoData.length - 1;
+          }else{
+            tangoNumber += num;
+          };
+   };
+ });
+</script>

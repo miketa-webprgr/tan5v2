@@ -1,0 +1,17 @@
+<table class="table">
+  <tr>
+    <th> 単語帳名前 </th>
+    <th> タイプ </th>
+    <th> 単語数 </th>
+    <th> 更新日 </th>
+    <th> 削除 </th>
+  </tr>
+  <% @wordnotes.each do |wordnote| %>
+    <tr>
+      <td> <%= link_to wordnote.name, user_tangos_url(user_id: user.id, key: key) %> </td>
+      <td> <%= wordnote.subject  %> </td>
+      <td> <%= link_to "削除",root_url, data: {confirm: "本当に削除しますか？"}, remote: true %></td>
+    </tr>
+  <% end %>
+</table>
+

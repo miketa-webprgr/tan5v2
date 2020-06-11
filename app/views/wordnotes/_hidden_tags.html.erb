@@ -1,0 +1,6 @@
+<% if @current_user.id == wordnote.user_id %>
+  <%= hidden_field_tag "name-#{wordnote.id}", wordnote.name %>
+  <%= hidden_field_tag "subject-#{wordnote.id}", wordnote.subject %>
+  <%= hidden_field_tag "is_open-#{wordnote.id}", wordnote.is_open %>
+<% end %>
+

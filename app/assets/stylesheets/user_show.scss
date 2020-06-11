@@ -1,0 +1,21 @@
+div.profile-box {
+  margin: 0 auto;
+  width: 400px;
+  text-align:center;
+  padding: 15px;
+  font-size: large;
+  h1 {
+    font-size: x-large;
+  }
+  .user-profile-image img{
+    border-radius: 50%;
+    width: 200px;
+    border: 5px black solid;
+  }
+}
+
+.not-open::after{
+  content: "🔒";
+  
+  
+}

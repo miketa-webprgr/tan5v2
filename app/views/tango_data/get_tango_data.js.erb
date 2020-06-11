@@ -1,0 +1,11 @@
+jQuery(function($){
+  $('#trial-count').text(<%= @trial_count %>);
+  $('#correct-ratio').text(<%= @correct_ratio %>);
+  //$.highlightStars(5);
+  let star = 1;
+  <% if @star %>
+    star = <%= @star %>
+  <% end %>
+  $.highlightStars(star)
+
+});

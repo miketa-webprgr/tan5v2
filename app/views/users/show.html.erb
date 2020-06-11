@@ -1,0 +1,76 @@
+<% @title = @user.name %>
+<%= render partial: "tango_configs/config_window" %>
+<%= render partial: "wordnotes/edit_wordnote" %>
+<div class="container-fluid">
+  <div class="row">
+    <div id="user-show-left" class="col-lg-6 col-12">
+      <div class="profile-box">
+        <div class="user-profile-image">
+          <%= image_tag @user.profile_image.url if @user.profile_image? %>
+          <%= image_tag '/uploads/user/profile_image/no_data/no_image.png' if @user.profile_image? == false %>
+        </div>
+        <div class="user-name">
+          <h1><%= @user.name %></h1>
+        </div>
+        <div class="user-profile">
+          <%= @user.profile %>
+        </div>
+        <% if @current_user == @user %>
+          <div class="user-email">
+            <%= @user.email %>
+          </div>
+          <div class="user-created_at">
+            <%= @user.created_at.to_s.split(" +").first %>
+          </div>
+          <div>
+            <%= link_to "登録変更", edit_user_path(@current_user), class: "btn btn-info" %>
+          </div>
+        <% end %>
+      </div>
+
+
+        <% if @current_user == @user %>
+          <div class="user-config">
+            <div id="wordnote_register" class="container">
+              <%= render "wordnotes/form" , wordnotes: @wordnotes, current_user: @current_user %>
+            </div>
+            <div id="tango_register" class="container">
+              <%= render "tangos/form" , tango: @tango, wordnotes: @wordnotes, current_user: @current_user %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div id="categories" class="col-lg-6 col-12">
+      <%= render partial: "/wordnotes/list", locals: { wordnotes: @wordnotes , user: @user} %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="js-zone">
+  <%= javascript_include_tag 'sample' %>
+  <%= javascript_include_tag 'edit_wordnote' %>
+<script>
+jQuery(function(){ $.config_modal() ;});
+jQuery(function(){ $.editWordnote() ;});
+jQuery(function($){
+  let form = $('#tango_register').find('form');
+  let actionValue = $('#tango_register').find('form').attr('action');
+  let wordnoteId = $('#select-wordnote option:selected').val();
+  $('#continue').addClass('config-item')
+  changeFormAction(wordnoteId);
+
+  $(form).on('change','#tango_wordnote_id',function(){
+    let wordnoteId = $(this).val();
+    changeFormAction(wordnoteId);
+  });
+
+  function changeFormAction(wordnoteId){
+    actionValue = actionValue.split(/wordnotes\/\d+\/tangos/).join("wordnotes/" + wordnoteId + "/tangos")
+    form.attr('action', actionValue)
+  };
+
+  
+})
+</script>
+
+</div>

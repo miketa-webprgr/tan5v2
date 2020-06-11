@@ -1,0 +1,7 @@
+ja:
+  views:
+    pagination:
+      first: "先頭"
+      last: "最後"
+      previous: "前"
+      next: "次"

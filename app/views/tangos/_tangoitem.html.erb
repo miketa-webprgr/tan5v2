@@ -1,0 +1,13 @@
+
+      <td><input type="checkbox" id="delete-check-<%= tango.id %>"></td>
+      <td><%= tango.id %></td>
+      <td class='question'><%= tango.question %></td>
+      <td class='answer'><%= tango.answer %></td>
+      <td class='hint'><%= tango.hint %></td>
+      <td class='updated_at'><span class="updated-text"><%= tango.updated_at.to_s.split(" +").first %></span>
+      <%= form_with model: tango, method: :patch,url: user_wordnote_tango_path(user_id: @current_user, wordnote_id: @wordnote.id ,id: tango.id) do |f| %>
+      <%= f.hidden_field :question, value: tango.question %>
+      <%= f.hidden_field :answer, value: tango.answer %>
+      <%= f.hidden_field :hint, value: tango.hint %>
+      <%= f.submit "update", class: "update-btn btn-primary hidden" %>
+      <% end %><button type="button" class="update-cancel-btn btn-default hidden">キャンセル</button></td>

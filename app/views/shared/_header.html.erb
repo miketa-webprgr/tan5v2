@@ -1,0 +1,31 @@
+<header>
+  <span>
+    <%= link_to "tan5", :root, class: "logo" %>
+  </span>
+  <%= 
+    if @title 
+      content_tag(:h1, @title)
+    end
+  %>
+  <span>
+  <%= 
+    if @current_user 
+      link_to "ログアウト", :session, method: :delete , class: "login-button"
+    else
+      link_to "ログイン", :login , class: "login-button"
+    end
+  %>
+  </span>
+  <span>
+    <% if @current_user #debug %>
+      <%= form_with url: search_users_path, method: :get, local: true do |f| %>
+        <%= f.text_field :search_word, placeholder: "ユーザー検索" %>
+      <% end %>
+        
+    <% end %>
+  </span>
+</header>
+<div id="flash-message">
+<%= content_tag(:span, flash[:success], class: "alert alert-success") if flash[:success] %>
+<%= content_tag(:span, flash[:danger], class: "alert alert-danger") if flash[:danger] %>
+</div>
