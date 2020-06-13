@@ -10,7 +10,6 @@
   <span>
   <%= 
     if @current_user 
-      link_to "ログアウト", :session, method: :delete , class: "login-button"
     else
       link_to "ログイン", :login , class: "login-button"
     end

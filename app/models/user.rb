@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  paginates_per 20
   include StringNormalizer
   has_many :wordnotes, class_name: "Wordnote", dependent: :destroy
   has_many :tango_datum, class_name: "TangoDatum", dependent: :destroy

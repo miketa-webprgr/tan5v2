@@ -74,7 +74,7 @@ class UsersController < Base
       @users = User.left_outer_joins(:wordnotes).where('wordnotes.subject like ?', "%#{search_word}%").or(User.left_outer_joins(:wordnotes).where('users.name like ?', "%#{search_word}%")).distinct
       #@users = User.where('users.name like ?', "%#{search_word}%")
     end
-    @users = @users.page(params[:page]).order(created_at: :desc)
+    @users = @users.page(params[:page]).order(updated_at: :desc)
     render 'users/index'
   end
   

@@ -1,11 +1,10 @@
-<% @title = "登録情報変更" %>
-<h1><%= @title %></h1>
+<% @title = "アカウント情報" %>
 
-<div id="input-form">
+<h1 class="edit-user-form"><%= @title %></h1>
+<div id="edit-user-form">
+ <%= link_to "ログアウト", :session, method: :delete, class: "logout-btn btn btn-info" %>
  <%= form_with model: @user, url: :user, local: true do |f| %>
    <%= render "form", f: f %>
-     <%= f.submit "登録", class: "btn btn-primary" %>
-     <%= link_to "キャンセル", :root, class: "btn btn-default"  %>
  <% end %>
- <%= link_to "ユーザー削除", user_path(@user), method: :delete, data: {confirm: "本当に削除しますか？"} ,class: "btn btn-danger btn-xs" %>
+ <%= link_to "ユーザー削除", user_path(@user), method: :delete, data: {confirm: "本当に削除しますか？"} ,class: "btn btn-danger" %>
 </div>

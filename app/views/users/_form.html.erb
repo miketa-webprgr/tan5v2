@@ -1,16 +1,13 @@
-<div class="notes">
-  <span class="mark">*</span> 印がついた項目は入力必須です。
-</div>
 <div>
-  <%= f.label :email, "メールアドレス", class: "required" %>
+  <%= f.label :email, "メールアドレス(必須) 例：taro@example.com", class: "required" %>
   <%= f.email_field :email, size: 32, required: true %>
 </div>
 <div>
-  <%= f.label :password, "パスワード", class: "required" %>
+  <%= f.label :password, "パスワード(必須) 例：abcd-efg123", class: "required" %>
   <%= f.password_field :password, size: 32, required: true %>
 </div>
 <div>
-  <%= f.label :name, "アカウント名", class: "required" %>
+  <%= f.label :name, "アカウント名(必須) taro", class: "required" %>
   <%= f.text_field :name, required: true %>
 </div>
 <div>
@@ -18,12 +15,14 @@
   <%= f.text_area :profile %>
 </div>
 <div>
-  <%= f.label :profile_image, "アイコン" %>
+  <%= f.label :profile_image, "アイコン画像" %>
   <%= f.file_field :profile_image, accept: 'image/jpeg,image/gif,image/png' %>
 </div>
 <% if @current_user.admin? %>
 <div>
-  <%= f.label :suspended, "アカウント無効化" %>
+  <%= f.label :suspended, "アカウント無効化", class: "suspend-label" %>
   <%= f.check_box :suspended %>
 </div>
 <% end %>
+<%= f.submit "登録", class: "btn btn-primary" %>
+<%= link_to "キャンセル", :root, class: "btn btn-default"  %>

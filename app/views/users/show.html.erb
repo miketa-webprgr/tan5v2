@@ -16,14 +16,11 @@
           <%= @user.profile %>
         </div>
         <% if @current_user == @user %>
-          <div class="user-email">
-            <%= @user.email %>
-          </div>
           <div class="user-created_at">
-            <%= @user.created_at.to_s.split(" +").first %>
+            <i class="fa fa-calendar"></i> 登録日 <%= @user.created_at.to_s.split(" +").first.split(" ").first %>
           </div>
           <div>
-            <%= link_to "登録変更", edit_user_path(@current_user), class: "btn btn-info" %>
+            <%= link_to "アカウント情報", edit_user_path(@current_user), class: "btn btn-info" %>
           </div>
         <% end %>
       </div>

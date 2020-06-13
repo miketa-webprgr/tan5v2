@@ -131,6 +131,7 @@
          setTango();
        };
    };
+
    function resetTangoArray(){
      tangoArray = [];
      tangoData = $('#questions').find('tr');
@@ -158,16 +159,22 @@
      clearInterval(questionInterval);
      $('#auto-btn').removeClass('auto-on').text(`▶ `);
    };
+   function resetTimer(){
+     if(questionInterval){
+       stopTimer();
+       runTimer(interval);
+     }
+   }
    function controlTimer(){
      $('#auto-btn').click(function(){
        if($(this).attr('class').match(/auto-on/)){
          stopTimer();
        }else{
          if(interval > 0 ){
-           runTimer(interval);
          }else{
-           runTimer(3);
+           interval = 3;
          };
+         runTimer(interval);
        }
        
      });
@@ -325,10 +332,12 @@
          changeTangoData({trial_num: true}
        )};
        changeTangoStatus();
+       resetTimer();
      });
      wrongBtnHtml.click(function(){
        changeTangoData({wrong_num: true});
        changeTangoStatus();
+       resetTimer();
      });
 
      /// modal

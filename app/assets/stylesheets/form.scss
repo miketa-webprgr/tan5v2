@@ -3,6 +3,9 @@
 div.notes { font-size: small;margin:5px 0 5px; display: inline;}
 div#wrapper {
   div#container {
+      .btn-info{
+        background-color: #6666ee;
+      }
     div#input-form {
       width: 500px;
       margin: 0 auto;
@@ -21,28 +24,46 @@ div#wrapper {
         color: red;
       }
     }
-    h1.login-input-form{
+    h1.edit-user-form, h1.login-input-form, h1.signup-form, h1.edit-user-form{
         margin: 40px 0;
         text-align: center;
         font-size: 2rem;
         color: #666;  
     }
-    div#login-input-form {
+    div#login-input-form, div#signup-form, div#edit-user-form {
       max-width: 700px;
       margin: 0 auto;
       padding: 10px;
       border-radius: 10px;
-      /* border: solid 3px #333333; */
       background-color: snow;
-      input.btn-primary{
+
+      /* btn */
+      .btn{
         border-radius: 10px;
-        color: white;
-        background-color: #8cf;
         font-size: 25px;
         height: 2.5em;
         border-bottom: none;
+        margin-bottom: 25px;
       }
-      input {
+      input.btn-primary{
+        color: white;
+        background-color: #8cf;
+      }
+      a.btn-default{
+        display: block;
+        color: #666;
+        background-color: #eee;
+      }
+      a.btn-danger{
+        display: block;
+        color: white;
+        background-color: red;
+      }
+      a.logout-btn{
+        display: block;
+      }
+      /* input,textarea, label */
+      input, textarea {
         overflow: visible;
         border: none;
         width: 100%;
@@ -54,11 +75,13 @@ div#wrapper {
         padding: 5px;
         background: white;
         margin-bottom: 0px;
-        /* border: 1px black solid; */
         display: block;
         padding-top: 5px;
         color: #ccc;
         font-size: x-large;
+      }
+      label.suspend-label {
+        display: inline;
       }
     }
   }
@@ -115,11 +138,6 @@ div#tango_register {
   
 }
 div#wordnote_register {
-    max-width: 700px;
-    background-color: #fff;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    padding: 10px;
     h3 {
       display: inline;
       font-size: 1.5em;
@@ -169,4 +187,12 @@ div#wordnote_register {
       color: red;
     }
   
+}
+#edit-user-form,#wordnote_register,#tango_register,.profile-box{
+    max-width: 700px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 10px;
+
 }
