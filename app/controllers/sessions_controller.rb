@@ -14,14 +14,15 @@ class SessionsController < Base
     if @form.email.present?
       user = User.find_by("LOWER(email) = ?", @form.email.downcase)
     end
-    if true #Authenticator.new(user).authenticate(@form.password)
+    @save = false
+    if Authenticator.new(user).authenticate(@form.password)
       session[:user_id] = user.id
+      @save = true
       flash[:success] = "ログイン成功"
-      redirect_to user_path(id: user.id)
     else
-      flash.now[:danger] = "入力エラー"
-      render action: "new"
+      flash[:danger] = "パスワードかメールアドレスのいずれかが間違っています。"
     end
+    
   end
 
   def destroy

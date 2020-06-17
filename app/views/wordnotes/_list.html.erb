@@ -4,9 +4,13 @@
     <th> タイプ </th>
     <th> 単語数 </th>
     <th> 設定 </th>
+    <% if @current_user.id == @user.id %>
     <th> 編集 </th>
+    <% end %>
     <th> 更新日 </th>
+    <% if @current_user.id == @user.id %>
     <th> 削除 </th>
+    <% end %>
   </tr>
   <% @wordnotes.each do |wordnote| %>
     <% if wordnote.is_open == true || @current_user.id == wordnote.user_id %>
@@ -17,12 +21,16 @@
       <td> <button class="btn " id="config-no-<%= wordnote.id %>"><i class="fa fa-cog"></i></button> 
       <%= render partial: "tango_configs/hidden_tags", locals: {wordnote: wordnote} %>
       </td>
+      <% if @current_user.id == wordnote.user_id %>
       <td> <button class="btn " id="edit-no-<%= wordnote.id %>"><i class="fa fa-book"></i></button> 
       <%= render partial: "wordnotes/hidden_tags", locals: {wordnote: wordnote} %>
       </td>
+      <% end %>
       <% last_update = wordnote.tangos.last ? wordnote.tangos.last.updated_at : wordnote.updated_at %>
       <td> <%= last_update.to_s.split(" +").first %> </td>
+      <% if @current_user.id == wordnote.user_id %>
       <td> <%= link_to "削除",user_wordnote_url(user_id: user.id, id: wordnote.id) , method: :delete , data: {confirm: "本当に削除しますか？"}, remote: true %></td>
+      <% end %>
     </tr>
     <% end %>
   <% end %>

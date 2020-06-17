@@ -1,7 +1,7 @@
 <% @title = "tan5にログイン" %>
 <h1 class="login-input-form"><%= @title %></h1>
 <div id="login-input-form">
-  <%= form_with model: @form, url: :session, local: true,data: {remote: false} do |f| %>
+  <%= form_with model: @form, url: :session do |f| %>
     <div>
       <%= f.label :email, "メールアドレス" %>
       <%= f.text_field :email, autocapitalize: "none", autocomplete: "on", autocorrect:"off" %>
@@ -15,3 +15,10 @@
     </div>
   <% end %>
 </div>
+
+<script>
+$(function(){
+  setTimeout("$('.alert.alert-danger').fadeOut('slow')", 2000)
+  setTimeout("$('.alert.alert-success').fadeOut('slow')",2000);
+})
+</script>

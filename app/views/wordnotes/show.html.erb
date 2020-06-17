@@ -202,15 +202,17 @@
    
    
    function showAllTangos(){
-     showAllTangosHtml.click(function(){
-       if(tangosHtml.attr('class').match(/hidden/)){
-         tangosHtml.removeClass('hidden');
-         showAllTangosHtml.text('△');
-       } else {
-         tangosHtml.addClass('hidden');
-         showAllTangosHtml.text('▽');
-       };
-     });
+     if( $('#current_user_id').val() == location.pathname.split("/")[2] ){ 
+       showAllTangosHtml.click(function(){
+         if(tangosHtml.attr('class').match(/hidden/)){
+           tangosHtml.removeClass('hidden');
+           showAllTangosHtml.text('△');
+         } else {
+           tangosHtml.addClass('hidden');
+           showAllTangosHtml.text('▽');
+         };
+       });
+     }
    };
    function operateStatus(){
 
