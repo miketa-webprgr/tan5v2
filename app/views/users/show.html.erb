@@ -36,7 +36,16 @@
             </div>
           </div>
         <% end %>
-      </div>
+
+
+        <div class='favorites-list'>
+          <%= render "favorites/list" , user: @user, favorites: @favorites, current_user: @current_user %>
+        </div>
+
+
+    </div>
+
+
       <div id="categories" class="col-lg-6 col-12">
       <%= render partial: "/wordnotes/list", locals: { wordnotes: @wordnotes , user: @user} %>
       </div>
@@ -49,12 +58,15 @@
 <script>
 jQuery(function(){ $.config_modal() ;});
 jQuery(function(){ $.editWordnote() ;});
+jQuery(function(){ $.changeFavorite() ;});
 jQuery(function($){
   let form = $('#tango_register').find('form');
   let actionValue = $('#tango_register').find('form').attr('action');
   let wordnoteId = $('#select-wordnote option:selected').val();
   $('#continue').addClass('config-item')
-  changeFormAction(wordnoteId);
+  if( $('#current_user_id').val() == location.pathname.split('/')[2]){
+    changeFormAction(wordnoteId);
+  }
 
   $(form).on('change','#tango_wordnote_id',function(){
     let wordnoteId = $(this).val();

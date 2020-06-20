@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :wordnotes, class_name: "Wordnote", dependent: :destroy
   has_many :tango_datum, class_name: "TangoDatum", dependent: :destroy
   has_many :tango_config, class_name: "TangoConfig", dependent: :destroy
+  has_many :favorite, class_name: "Favorite", dependent: :destroy
   mount_uploader :profile_image, ProfileImageUploader
   validate :profile_image_size
   

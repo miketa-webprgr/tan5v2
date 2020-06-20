@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "top#index"
+  post 'change_favorite', to: 'favorites#change'
   resources :users do
     get :search , on: :collection
     member do

@@ -30,6 +30,21 @@ div#wrapper {
         font-size: 2rem;
         color: #666;  
     }
+    div#categories > h3,div.favorites-list > h3{
+      background: #6666ee;
+      color: white;
+      border-radius: 10px;
+      text-align: center;
+      padding: 5px;
+      margin: 10px 0;
+    }
+    div.favorites-list{
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: snow;
+    }
     div#login-input-form, div#signup-form, div#edit-user-form {
       max-width: 700px;
       margin: 0 auto;

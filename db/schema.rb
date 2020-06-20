@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_09_134913) do
+ActiveRecord::Schema.define(version: 2020_06_17_153830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "wordnote_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "wordnote_id"], name: "index_favorites_on_user_id_and_wordnote_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+    t.index ["wordnote_id"], name: "index_favorites_on_wordnote_id"
+  end
 
   create_table "tango_configs", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -80,6 +90,8 @@ ActiveRecord::Schema.define(version: 2020_06_09_134913) do
     t.boolean "is_open", default: true
   end
 
+  add_foreign_key "favorites", "users"
+  add_foreign_key "favorites", "wordnotes"
   add_foreign_key "tango_configs", "users"
   add_foreign_key "tango_configs", "wordnotes"
 end

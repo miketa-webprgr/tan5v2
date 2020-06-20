@@ -17,6 +17,7 @@ class UsersController < Base
     @user = User.find(params[:id])
     @wordnotes = User.find(params[:id]).wordnotes.all.order(updated_at: :asc)
     @tango = @user.wordnotes.build.tangos.build
+    @favorites = @user.favorite.all
   end
 
 
