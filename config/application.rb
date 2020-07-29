@@ -28,6 +28,6 @@ module Tan5
       g.controller_spaces false
       g.view_space false
     end
-    config.web_console.whitelisted_ips = "10.0.2.2"
+    #config.web_console.whitelisted_ips = "10.0.2.2"
   end
 end

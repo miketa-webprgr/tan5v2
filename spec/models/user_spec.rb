@@ -45,5 +45,15 @@ RSpec.describe User, type: :model do
       user = build(:user, email: " a@@a.com. ")
       expect(user).not_to be_valid
     end
+    example "email が0文字以下、48文字以上だと無効 " do
+      user = build(:user, email: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+      expect(user).not_to be_valid
+      user = build(:user, email: "")
+      expect(user).not_to be_valid
+    end
+    pending "passwordがない" do
+      user = build(:user, email: "a@a.com")
+      expect(user).not_to be_valid
+    end
   end
 end

@@ -13,9 +13,11 @@ class User < ApplicationRecord
     self.name = normalize_as_name(name)
     self.email = normalize_as_email(email)
   end
-  validates :name, presence: true
+  validates :name, presence: true, length: { in: 1..24}
   validates :email, presence: true, "valid_email_2/email": true,
-    uniqueness: true
+    uniqueness: true, length: { in: 1..48}
+
+
   def password=(raw_password)
     if raw_password.kind_of?(String)
       self.hashed_password = BCrypt::Password.create(raw_password)
