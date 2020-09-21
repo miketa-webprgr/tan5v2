@@ -36,7 +36,7 @@
         <% last_update = wordnote.tangos.last ? wordnote.tangos.last.updated_at : wordnote.updated_at %>
         <td> <%= last_update.to_s.split(" +").first %> </td>
         <% if @current_user.id == wordnote.user_id %>
-        <td> <%= link_to "削除",user_wordnote_url(user_id: user.id, id: wordnote.id) , method: :delete , data: {confirm: "本当に削除しますか？"}, remote: true %></td>
+        <td> <%= link_to "削除",wordnote_url(user_id: user.id, id: wordnote.id) , method: :delete , data: {confirm: "本当に削除しますか？"}, remote: true %></td>
         <% end %>
       </tr>
       <% end %>

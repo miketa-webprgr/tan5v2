@@ -18,10 +18,10 @@
       <%= check_box_tag :is_open, false, nil,{class: "edit-item"} %>
       </div>
       <div>
-        <%= link_to "CSV ダウンロード", user_wordnote_download_csv_path(user_id:0, wordnote_id:0), class: 'download-csv',method: "post" %>
+        <%= link_to "CSV ダウンロード", wordnote_download_csv_path(user_id:0, wordnote_id:0), class: 'download-csv',method: "post" %>
       </div>
       <div>
-        <%= form_tag user_wordnote_upload_csv_path(user_id:0, wordnote_id:0), class:'upload-csv', method: "post", multipart: true, remote: true do %>
+        <%= form_tag wordnote_upload_csv_path(user_id:0, wordnote_id:0), class:'upload-csv', method: "post", multipart: true, remote: true do %>
           <%= file_field_tag :csv_file, accept: '.csv' %>
           <%= submit_tag "CSV アップロード" %>
         <% end %>

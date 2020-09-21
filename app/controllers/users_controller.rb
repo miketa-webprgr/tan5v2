@@ -9,13 +9,13 @@ class UsersController < Base
   end
 
   def index
-    @users = User.all
+    @users = User.eager_load(:wordnotes)
     @users = @users.page(params[:page]).order(email: :asc)
   end
 
   def show
     @user = User.find(params[:id])
-    @wordnotes = User.find(params[:id]).wordnotes.all.order(updated_at: :asc)
+    @wordnotes = User.find(params[:id]).wordnotes.all.includes(:user).order(updated_at: :asc)
     @tango = @user.wordnotes.build.tangos.build
     @favorites = @user.favorite.all
   end
@@ -70,7 +70,7 @@ class UsersController < Base
     search_word = params[:search_word]
     @users = nil
     if search_word.strip == ""
-      @users = User.all
+      @users = User.all.eager_load(:wordnotes)
     else
       @users = User.left_outer_joins(:wordnotes).where('wordnotes.subject like ?', "%#{search_word}%").or(User.left_outer_joins(:wordnotes).where('users.name like ?', "%#{search_word}%")).distinct
       #@users = User.where('users.name like ?', "%#{search_word}%")

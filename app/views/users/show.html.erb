@@ -60,27 +60,6 @@
 jQuery(function(){ $.config_modal() ;});
 jQuery(function(){ $.editWordnote() ;});
 jQuery(function(){ $.changeFavorite() ;});
-jQuery(function($){
-  let form = $('#tango_register').find('form');
-  let actionValue = $('#tango_register').find('form').attr('action');
-  let wordnoteId = $('#select-wordnote option:selected').val();
-  $('#continue').addClass('config-item')
-  if( $('#current_user_id').val() == location.pathname.split('/')[2]){
-    changeFormAction(wordnoteId);
-  }
-
-  $(form).on('change','#tango_wordnote_id',function(){
-    let wordnoteId = $(this).val();
-    changeFormAction(wordnoteId);
-  });
-
-  function changeFormAction(wordnoteId){
-    actionValue = actionValue.split(/wordnotes\/\d+\/tangos/).join("wordnotes/" + wordnoteId + "/tangos")
-    form.attr('action', actionValue)
-  };
-
-  
-})
 </script>
 
 </div>

@@ -53,7 +53,7 @@ jQuery.editWordnote = function(){
   /// update config data by ajax
   function editWordnote(editWordnoteParams){
     $.ajax({
-        url: '/users/' + $('#current_user_id').val()  + '/wordnotes/' + $('#edit_wordnote_id').val(),
+        url: '/wordnotes/' + $('#edit_wordnote_id').val(),
         type: "PATCH",
         data: editWordnoteParams,
         dataType: "text",

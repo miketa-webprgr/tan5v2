@@ -6,17 +6,16 @@ Rails.application.routes.draw do
   delete "session" => "sessions#destroy"
 
   post 'change_favorite', to: 'favorites#change'
+  post 'change_tango_config', to: 'tango_configs#change'
 
-  resources :users do
+  resources :users, shallow: true do
     get :search , on: :collection
-    member do
-      get :suspend
-      post 'change_tango_config', to: 'tango_configs#change'
-    end
-    resources :wordnotes, except: [:index, :new, :edit] do
+    get :suspend, on: :member
+    resources :wordnotes, only: [:show], shallow: false
+    resources :wordnotes, except: [:index, :new, :edit, :show] do
       resources :tangos, only: [:create, :update, :destroy] do
-        post 'change_tango_data', to: 'tango_data#change'
-        get 'get_tango_data', to: 'tango_data#get_tango_data'
+        post 'change_tango_data', to: 'tango_data#change', as: 'change_data_of', on: :member
+        get 'get_tango_data', to: 'tango_data#get_tango_data', as: 'get_data_of', on: :member
       end
       post 'download_csv' , to: 'wordnotes#download_csv'
       post 'upload_csv' , to: 'wordnotes#upload_csv'

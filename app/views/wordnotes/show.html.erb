@@ -45,7 +45,7 @@
 </div>
 <div id="show-tangos"> ▽ </div>
 <div id="questions" class="hidden">
-  <%= form_with model: @tangos, id: "delete-btn", method: :delete,url: user_wordnote_delete_checked_tangos_path(user_id: @current_user, wordnote_id: @wordnote) do |f| %>
+  <%= form_with model: @tangos, id: "delete-btn", method: :delete,url: wordnote_delete_checked_tangos_path(user_id: @current_user, wordnote_id: @wordnote) do |f| %>
     <%= f.submit "削除", class: "delete-btn btn-danger" %>
   <% end %>
   <table class="table">
@@ -283,7 +283,7 @@
        params["tango_config"]["wordnote_id"] = wordnoteId;
        params["tango_config"]["last_question"] = lastQuestion;
         $.ajax({
-            url: '/users/' + $('#current_user_id').val()  + '/change_tango_config',
+            url: '/change_tango_config',
             type: "post",
             data: params,
             dataType: "text",
@@ -295,7 +295,6 @@
           
         });
 
-        A
       });
 
      /// delete checked tangos
@@ -395,7 +394,7 @@
 
    function getTangoData(){
      $.ajax({
-       url: location.pathname + '/tangos/' + tangoArray[tangoNumber].tangoId + '/get_tango_data',
+       url: '/tangos/' + tangoArray[tangoNumber].tangoId + '/get_tango_data',
        type: "get",
        dataType: "script",
        beforeSend: function(xhr){
@@ -405,8 +404,10 @@
      });
    };
    function changeTangoData(tangoDataParams){
+     let wordnoteId = Number($('[id*="config-no-"]').attr("id").split("-").pop());
+     tangoDataParams.wordnote_id = wordnoteId;
      $.ajax({
-       url: location.pathname + '/tangos/' + tangoArray[tangoNumber].tangoId + '/change_tango_data',
+       url: '/tangos/' + tangoArray[tangoNumber].tangoId + '/change_tango_data',
        type: "post",
        data: tangoDataParams,
        dataType: "script",

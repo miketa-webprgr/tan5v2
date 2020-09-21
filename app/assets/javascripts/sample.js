@@ -50,7 +50,7 @@ jQuery.config_modal = function(){
   /// update config data by ajax
   function changeConfigData(tangoConfigParams){
     $.ajax({
-        url: '/users/' + $('#current_user_id').val()  + '/change_tango_config',
+        url: '/change_tango_config',
         type: "post",
         data: tangoConfigParams,
         dataType: "text",
