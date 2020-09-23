@@ -59,7 +59,8 @@ class TangosController < Base
   private def tango_csv_params
     params.require(:tango)
   end
+
   private def tango_params
-	  params.require(:tango).permit(:wordnote_id,:question,:answer,:hint)
+    params.require(:tango).permit(:wordnote_id,:question,:answer,:hint)
   end
 end

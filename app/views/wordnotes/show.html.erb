@@ -45,7 +45,7 @@
 </div>
 <div id="show-tangos"> ▽ </div>
 <div id="questions" class="hidden">
-  <%= form_with model: @tangos, id: "delete-btn", method: :delete,url: wordnote_delete_checked_tangos_path(user_id: @current_user, wordnote_id: @wordnote) do |f| %>
+  <%= form_with model: @tangos, id: "delete-btn", method: :delete,url: delete_checked_tangos_on_wordnote_path(user_id: @current_user, wordnote_id: @wordnote) do |f| %>
     <%= f.submit "削除", class: "delete-btn btn-danger" %>
   <% end %>
   <table class="table">
@@ -222,7 +222,7 @@
      });
 
      /// edit tango
-     $(document).on('click',"[id*='tango-no-'] > td",function(){
+     $(document).on('dblclick',"[id*='tango-no-'] > td",function(){
        var attr = $(this).attr('class');
        var value = $(this).text();
        if (!attr){} else if (attr.length > 1){
