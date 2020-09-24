@@ -54,10 +54,11 @@
   </div>
 </div>
 <div class="js-zone">
-  <%= javascript_include_tag 'sample' %>
-  <%= javascript_include_tag 'edit_wordnote' %>
+  <%= javascript_include_tag 'shared/learn_config' %>
+  <%= javascript_include_tag 'users/show/edit_wordnote' %>
+  <%= javascript_include_tag 'users/show/change_favorite' %>
 <script>
-jQuery(function(){ $.config_modal() ;});
+jQuery(function(){ $.learnConfig() ;});
 jQuery(function(){ $.editWordnote() ;});
 jQuery(function(){ $.changeFavorite() ;});
 </script>

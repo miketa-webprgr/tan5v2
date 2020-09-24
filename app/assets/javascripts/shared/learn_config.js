@@ -1,4 +1,4 @@
-jQuery.config_modal = function(){
+jQuery.learnConfig = function(){
   /////// tango_config
   /// show tango config panel
   let changedFlagForLearn = false;
@@ -45,7 +45,6 @@ jQuery.config_modal = function(){
     params["tango_config"]["wordnote_id"] = $('#tango_config_wordnote_id').val();
     changeConfigData(params);
   });
-
   
   /// update config data by ajax
   function changeConfigData(tangoConfigParams){
@@ -58,12 +57,9 @@ jQuery.config_modal = function(){
           xhr.setRequestHeader('X-CSRF-Token',$('meta[name="csrf-token"]').attr('content'));
         },
         //error: function(XMLHttpRequest, textStatus, errorThrown){ console.log(textStatus);},
-
       
     });
   };
-
-
   /// modal close
   $('#config-window .modal-close').on('click',function(){
     if( $('#learn-wrapper').length > 0 && changedFlagForLearn == true){
@@ -73,6 +69,4 @@ jQuery.config_modal = function(){
       $('.modal').fadeOut();
     };
   });
-
-
 };

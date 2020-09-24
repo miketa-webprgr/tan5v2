@@ -1,6 +1,6 @@
 jQuery.editWordnote = function(){
-  /////// tango_config
-  /// show tango config panel
+  /////// wordnote_config
+  /// show wordnote config panel
   let changedFlagForWordnote = false;
   $(document).on('click','[id*="edit-no-"]',function(){
     $('#edit-window').fadeIn();
@@ -14,7 +14,6 @@ jQuery.editWordnote = function(){
         if (name == "is_open"){
           if(val == "true"){
             $('#is_open').prop('checked', true);
-
           }else{
             $('#is_open').prop('checked', false);
           };
@@ -48,7 +47,6 @@ jQuery.editWordnote = function(){
     //params["wordnote"]["id"] = $('#edit_wordnote_id').val();
     editWordnote(params);
   });
-
   
   /// update config data by ajax
   function editWordnote(editWordnoteParams){
@@ -62,14 +60,8 @@ jQuery.editWordnote = function(){
         },
         //success: function(data){ alert("y");},
         //error: function(XMLHttpRequest, textStatus, errorThrown){ alert("error2");console.log(textStatus);},
-
-
-      
     });
   };
-
-
-
   /// modal close
   $('#edit-window .modal-close').on('click',function(){
     if( changedFlagForWordnote == true){
@@ -79,6 +71,5 @@ jQuery.editWordnote = function(){
       $('.modal').fadeOut();
     };
   });
-
 
 };

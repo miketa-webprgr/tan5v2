@@ -8,5 +8,4 @@ jQuery.changeFavorite = function(){
       starHtml.removeClass('favorited')
     }
   });
-
 };
