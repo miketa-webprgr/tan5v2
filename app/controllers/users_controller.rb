@@ -9,15 +9,14 @@ class UsersController < Base
   end
 
   def index
-    @users = User.eager_load(:wordnotes)
-    @users = @users.page(params[:page]).order(email: :asc)
+    @users = User.includes(:wordnotes).page(params[:page]).order(email: :asc)
   end
 
   def show
     @user = User.find(params[:id])
-    @wordnotes = User.find(params[:id]).wordnotes.all.includes(:user).order(updated_at: :asc)
+    @wordnotes = User.find(params[:id]).wordnotes.includes(:user, :tangos).order(updated_at: :asc)
     @tango = @user.wordnotes.build.tangos.build
-    @favorites = @user.favorite.all
+    @favorite_wordnotes = @user.favorite_wordnotes.includes(:user, :tangos)
   end
 
 

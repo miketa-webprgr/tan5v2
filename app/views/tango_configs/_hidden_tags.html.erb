@@ -1,5 +1,5 @@
-<% if @current_user.tango_config && @current_user.tango_config.find_by(wordnote_id: wordnote.id) %>
-  <% tango_config = @current_user.tango_config.find_by(wordnote_id: wordnote.id) %>
+<% if @current_user.tango_config && @current_user.get_tango_config(wordnote_id: wordnote.id) %>
+  <% tango_config = @current_user.get_tango_config(wordnote_id: wordnote.id) %>
   <%= hidden_field_tag "sort-#{wordnote.id}", tango_config.sort %>
   <%= hidden_field_tag "continue-#{wordnote.id}", tango_config.continue %>
   <%= hidden_field_tag "font_size-#{wordnote.id}", tango_config.font_size %>
@@ -7,4 +7,3 @@
   <%= hidden_field_tag "timer-#{wordnote.id}", tango_config.timer %>
   <%= hidden_field_tag "last_question-#{wordnote.id}", tango_config.last_question %>
 <% end %>
-

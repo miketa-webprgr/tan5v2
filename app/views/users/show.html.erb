@@ -1,4 +1,4 @@
-<% @title = @user.name %>
+<% @title = "マイページ" %>
 <%= render partial: "tango_configs/config_window" %>
 <%= render partial: "wordnotes/edit_wordnote" %>
 <div class="container-fluid">
@@ -10,7 +10,6 @@
           <%= image_tag '/uploads/user/profile_image/no_data/no_image.png' if @user.profile_image? == false %>
         </div>
         <div class="user-name">
-          <h1><%= @user.name %></h1>
           <h1><%= @user.name %></h1>
         </div>
         <div class="user-profile">
@@ -26,7 +25,6 @@
         <% end %>
       </div>
 
-
         <% if @current_user == @user %>
           <div class="user-config">
             <div id="wordnote_register" class="container">
@@ -37,30 +35,24 @@
             </div>
           </div>
         <% end %>
-
-
         <div class='favorites-list'>
-          <%= render "favorites/list" , user: @user, favorites: @favorites, current_user: @current_user %>
+          <%= render "wordnotes/favorite_wordnotes" , favorite_wordnotes: @favorite_wordnotes, current_user: @current_user %>
         </div>
-
-
-    </div>
-
-
+      </div>
       <div id="categories" class="col-lg-6 col-12">
-      <%= render partial: "/wordnotes/list", locals: { wordnotes: @wordnotes , user: @user} %>
+        <%= render partial: "/wordnotes/list", locals: { wordnotes: @wordnotes , user: @user} %>
       </div>
     </div>
   </div>
 </div>
+
 <div class="js-zone">
   <%= javascript_include_tag 'shared/learn_config' %>
   <%= javascript_include_tag 'users/show/edit_wordnote' %>
   <%= javascript_include_tag 'users/show/change_favorite' %>
-<script>
-jQuery(function(){ $.learnConfig() ;});
-jQuery(function(){ $.editWordnote() ;});
-jQuery(function(){ $.changeFavorite() ;});
-</script>
-
+  <script>
+    jQuery(function(){ $.learnConfig() ;});
+    jQuery(function(){ $.editWordnote() ;});
+    jQuery(function(){ $.changeFavorite() ;});
+  </script>
 </div>

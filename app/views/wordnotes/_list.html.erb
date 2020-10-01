@@ -20,7 +20,7 @@
       <tr id="wordnote-no-<%= wordnote.id %>">
         <td <%= 'class=not-open' if wordnote.is_open == false %>> <%= link_to wordnote.name, user_wordnote_url(user_id: user.id, id: wordnote.id) %> </td>
         <td> <%= wordnote.subject  %> </td>
-        <td> <%= wordnote.tangos.all.size  %> </td>
+        <td> <%= wordnote.tangos.size  %> </td>
         <td> <button class="btn " id="config-no-<%= wordnote.id %>"><i class="fa fa-cog"></i></button> 
         <%= render partial: "tango_configs/hidden_tags", locals: {wordnote: wordnote} %>
         </td>

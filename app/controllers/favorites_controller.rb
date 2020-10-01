@@ -1,4 +1,5 @@
-class FavoritesController < ApplicationController
+class FavoritesController < Base
+  before_action :current_user
 
   def change
     @current_user = User.find(favorite_params[:current_user_id])
@@ -14,6 +15,5 @@ class FavoritesController < ApplicationController
 
     def favorite_params
       params.require(:favorite).permit(:user_id, :wordnote_id, :current_user_id)
-
     end
 end

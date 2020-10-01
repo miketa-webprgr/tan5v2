@@ -3,29 +3,30 @@ require "csv"
 class WordnotesController < Base
   before_action :current_user
 
-
   def show
     @wordnote = User.find(params[:user_id]).wordnotes.find(params[:id])
-    @tangos = @wordnote.tangos.all.order(id: :asc)
     @tango_config = @current_user.tango_config.find_by(wordnote_id: params[:id])
-    if @tango_config == nil
-      @tango_config = @current_user.tango_config.build(wordnote_id: params[:id],font_size: 20,filter: 0 )
-    end
-    if @tango_config.sort == "desc"
-      @tangos = @tangos.reverse
-    elsif @tango_config.sort == "random"
-      @tangos = @tangos.shuffle
-    end
+    @tango_config = @current_user.tango_config.build(wordnote_id: params[:id],font_size: 20,filter: 0 ) if @tango_config == nil
     @tango_config.clicked_num += 1
     @tango_config.save
-    tango_data = @current_user.tango_datum.where(wordnote_id: @wordnote.id)
-    @tangos = @tangos.reject do |t|
-      star = 0
-      if tango_data.where(tango_id: t.id).first
-        star = tango_data.where(tango_id: t.id).first.star 
-      end
-      star < @tango_config.filter.to_i
+
+    case @tango_config.sort
+    when "desc"
+      @tangos = @wordnote.tangos.desc_with_datum
+    when "random"
+      @tangos = @wordnote.tangos.random_with_datum
+    else 
+      @tangos = @wordnote.tangos.asc_with_datum
     end
+
+    @tangos = @tangos.reject do |tango|
+      star = 0
+      if tango.tango_datum.first # tango has_one tango_datum に変更すべし
+        star = tango.tango_datum.first.star 
+        star < @tango_config.filter.to_i
+      end
+    end
+
     if @tangos.size == 0
       flash[:success] = "表示できる単語がありません。"
       redirect_to :root
@@ -38,7 +39,6 @@ class WordnotesController < Base
     if @wordnote.save
       @wordnotes = @user.wordnotes.all
     end
-      
   end
 
   def update

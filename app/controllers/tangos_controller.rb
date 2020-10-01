@@ -6,7 +6,6 @@ class TangosController < Base
     @tangos = @user.tangos.where(name: params[:key].first).where( subject: params[:key].last).order(created_at: :asc)
     if @tangos.size == 0
       flash[:danger] = "当該の単語帳はありません" 
-      #render action: "users" 
       redirect_to user_path(@current_user) 
     end
   end
@@ -15,8 +14,6 @@ class TangosController < Base
     @wordnote = @current_user.wordnotes.find(params[:wordnote_id])
     @tango = @wordnote.tangos.find(params[:id])
     @tango.update(tango_params)
-
-
   end
 
   def create_on_list
@@ -52,15 +49,14 @@ class TangosController < Base
    @delete_tangos = @current_user.wordnotes.find(params[:wordnote_id]).tangos.find(params[:tangos])
    @tango_json = @delete_tangos.to_json.html_safe
    @delete_tangos.each{|tango| tango.destroy}
-
-  end
-    
-
-  private def tango_csv_params
-    params.require(:tango)
   end
 
-  private def tango_params
-    params.require(:tango).permit(:wordnote_id,:question,:answer,:hint)
-  end
+  private 
+    def tango_csv_params
+      params.require(:tango)
+    end
+
+    def tango_params
+      params.require(:tango).permit(:wordnote_id,:question,:answer,:hint)
+    end
 end
