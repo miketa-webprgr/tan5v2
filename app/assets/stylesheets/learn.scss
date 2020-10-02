@@ -2,16 +2,24 @@
 
 div#wrapper {
   div#container {
+    div#tango-data{
+      font-size: x-large;
+      .round {
+        border-radius: 10px;
+      }
+    }
     table#questions {
         //display: none;
+      font-size: 1.2em;
+      #delete-btn{
+        display: inline;
+      }
     }
     .hidden{
       display:none;
     }
     div#learn-operation{
-      .icon{
-        font-size:3em;
-      }
+      font-size:3em;
     }
     div#show-tangos{
       background-color: white;
@@ -19,6 +27,7 @@ div#wrapper {
       text-align:center;
       margin:5px;
       border-radius: 10px;
+      font-size: 1.6em;
     }
     div#learn-wrapper{
       width:100%;
