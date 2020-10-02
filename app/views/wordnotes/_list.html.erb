@@ -10,7 +10,6 @@
       <th> 編集 </th>
       <% end %>
       <th> お気に入り </th>
-      <th> 更新日 </th>
       <% if @current_user.id == @user.id %>
       <th> 削除 </th>
       <% end %>
@@ -33,8 +32,6 @@
         <td>
           <%= render partial: "favorites/fav_btn", locals: {wordnote: wordnote, user: @user, current_user: @current_user} %>
         </td>
-        <% last_update = wordnote.tangos.last ? wordnote.tangos.last.updated_at : wordnote.updated_at %>
-        <td> <%= last_update.to_s.split(" +").first %> </td>
         <% if @current_user.id == wordnote.user_id %>
         <td> <%= link_to(wordnote_url(user_id: user.id, id: wordnote.id) , method: :delete , data: {confirm: "本当に削除しますか？"}, remote: true) do %>
             <%= button_tag type: "submit", style: "border-style: none;" do %>

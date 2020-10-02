@@ -2,11 +2,17 @@
 
 div#wrapper {
   div#container {
+    .hover-small{
+      font-size: 101%;
+    }
+    .c-small:active{
+      font-size: 105%;
+    }
+    .round {
+      border-radius: 10px;
+    }
     div#tango-data{
       font-size: x-large;
-      .round {
-        border-radius: 10px;
-      }
     }
     table#questions {
         //display: none;

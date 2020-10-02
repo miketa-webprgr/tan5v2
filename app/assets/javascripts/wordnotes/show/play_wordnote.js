@@ -60,14 +60,22 @@ jQuery.playWordnote = function(){
 
   function runTimer(interval){
     $('#auto-btn').addClass('auto-on').html(`<i class="fa fa-stop"></i> (${interval})`);
+    cnt = interval;
+    displayTimer = setInterval(function(){
+      cnt--;
+      $('#auto-btn').addClass('auto-on').html(`(${cnt})`);
+    },1000);
     questionInterval = setInterval(function(){
       changeTangoStatus();
+      clearInterval(displayTimer);
+      cnt = interval;
     },interval * 1000);
   };
 
   function stopTimer(){
     clearInterval(questionInterval);
-    $('#auto-btn').removeClass('auto-on').html(`<i class="fa fa-play"></i> `);
+    clearInterval(displayTimer);
+    $('#auto-btn').removeClass('auto-on').html(`<i class="fa fa-play"></i> play`);
   };
 
   function resetTimer(){
@@ -94,7 +102,7 @@ jQuery.playWordnote = function(){
   function setTango(){
     resetTangoArray();
     getTangoData();
-    $('#tango-number').text(tangoNumber);
+    $('#tango-number').text(tangoNumber + 1);
     answerHtml.addClass('hidden'); 
     questionHtml.text(tangoArray[tangoNumber].question);
     answerHtml.html(tangoArray[tangoNumber].answer.replace(/\n/g,"<br>"));
@@ -218,6 +226,18 @@ jQuery.playWordnote = function(){
       resetDeleteHiddenField();
     });
 
+    ////// control panel 
+
+    $(".c-small").hover(
+      function(){
+        $(this).addClass("hover-small");
+      },
+      function(){
+        $(this).removeClass("hover-small");
+      }
+    );
+
+
     ////// star
     $("[id*='star-']").hover(function(){
       let starNumber = $(this).attr("id").split('-').pop();
@@ -226,6 +246,10 @@ jQuery.playWordnote = function(){
     $("[id*='star-']").click(function(){
       let starNumber = $(this).attr("id").split('-').pop();
       changeTangoData({star: starNumber});
+      $('#flash-message').html('<span class="alert alert-warning">★を ' + starNumber  + ' に設定しました</span>').hide().fadeIn(300);
+      $(function(){
+        setTimeout("$('.alert.alert-warning').fadeOut('slow')", 500);
+      });
     });
 
     ////// tango panel 
@@ -237,14 +261,22 @@ jQuery.playWordnote = function(){
       resetTimer();
     });
     wrongBtnHtml.click(function(){
-      changeTangoData({wrong_num: true});
+      changeTangoData({wrong_num: true, trial_num: true});
       changeTangoStatus();
       resetTimer();
+      $('#flash-message').html('<span class="alert alert-danger">ミス</span>').hide().fadeIn(100);
+      $(function(){
+      setTimeout("$('.alert.alert-danger').fadeOut('slow')", 300);
+      });
     });
     correctBtnHtml.click(function(){
       changeTangoData({trial_num: true});
       changeTangoStatus();
       resetTimer();
+      $('#flash-message').html('<span class="alert alert-success">正解</span>').hide().fadeIn(100);
+      $(function(){
+      setTimeout("$('.alert.alert-success').fadeOut('slow')", 300);
+      });
     });
 
     /// modal
@@ -262,7 +294,7 @@ jQuery.playWordnote = function(){
        setTango();
     });
     $("[class*='to-10']").click(function(){
-       changeTangoNumber(-10);
+       changeTangoNumber(-9);
        setTango();
     });
     $("[class*='to+1']").click(function(){
@@ -270,7 +302,7 @@ jQuery.playWordnote = function(){
        setTango();
     });
     $("[class*='to+10']").click(function(){
-       changeTangoNumber(10);
+       changeTangoNumber(9);
        setTango();
     });
   };

@@ -25,6 +25,7 @@
   </span>
 </header>
 <div id="flash-message">
-<%= content_tag(:span, flash[:success], class: "alert alert-success") if flash[:success] %>
-<%= content_tag(:span, flash[:danger], class: "alert alert-danger") if flash[:danger] %>
+  <%= content_tag(:span, flash[:success], class: "alert alert-success") if flash[:success] %>
+  <%= content_tag(:span, flash[:danger], class: "alert alert-danger") if flash[:danger] %>
+  <%= content_tag(:span, flash[:info], class: "alert alert-info") if flash[:info] %>
 </div>

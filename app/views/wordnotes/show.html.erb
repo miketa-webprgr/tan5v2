@@ -11,17 +11,17 @@
 <div id="tango-data" style="margin: 0 auto; width:100%;">
   <ul class="list-group list-group-horizontal text-center">
     <li class="list-group-item flex-fill">
-    <div id="config-no-<%= @wordnote.id %>"><i class="fa fa-cog"></i></div>
+    <div id="config-no-<%= @wordnote.id %>" class="c-small"><i class="fa fa-cog "></i></div>
       <%= render partial: "tango_configs/hidden_tags", locals: {wordnote: @wordnote} %>
     </li>
-    <li class="round list-group-item flex-fill" id="auto-btn"><i class="fa fa-play"></i> play</li>
+    <li class="round list-group-item flex-fill c-small" id="auto-btn"><i class="fa fa-play"></i> play</li>
     <li class="round list-group-item flex-fill" id="trial-count">0</li>
     <li class="round list-group-item flex-fill" id="correct-ratio">0</li>
-    <li class="round list-group-item flex-fill icon" id="star-1" ><i class="fa fa-star"></i></li>
-    <li class="round list-group-item flex-fill icon" id="star-2" >☆</li>
-    <li class="round list-group-item flex-fill icon" id="star-3" >☆</li>
-    <li class="round list-group-item flex-fill icon" id="star-4" >☆</li>
-    <li class="round list-group-item flex-fill icon" id="star-5" >☆</li>
+    <li class="round list-group-item flex-fill icon c-small" id="star-1" ><i class="fa fa-star"></i></li>
+    <li class="round list-group-item flex-fill icon c-small" id="star-2" >☆</li>
+    <li class="round list-group-item flex-fill icon c-small" id="star-3" >☆</li>
+    <li class="round list-group-item flex-fill icon c-small" id="star-4" >☆</li>
+    <li class="round list-group-item flex-fill icon c-small" id="star-5" >☆</li>
   </ul>
 </div>
 <div id="learn-wrapper" class="row">
@@ -31,19 +31,23 @@
 </div>
 <div id="learn-operation" style="margin: 0 auto; width:100%;">
   <ul class="list-group list-group-horizontal text-center">
-    <li class="list-group-item flex-fill icon" id="correct-btn"><i class="far fa-circle"></i></li>
-    <li class="list-group-item flex-fill icon" id="hint-btn" ><i class="fa fa-info-circle"></i> Hint</li>
-    <li class="list-group-item flex-fill icon hidden" id="wrong-btn" ><i class="fas fa-times"></i></li>
+    <li class="round list-group-item flex-fill icon c-small" id="correct-btn"><i class="far fa-circle"></i></li>
+    <li class="round list-group-item flex-fill icon c-small" id="hint-btn" ><i class="fa fa-info-circle"></i> Hint</li>
+    <li class="round list-group-item flex-fill icon hidden c-small" id="wrong-btn" ><i class="fas fa-times"></i></li>
   </ul>
   <ul class="list-group list-group-horizontal text-center">
-    <li class="list-group-item flex-fill to-10"><i class="fas fa-angle-double-left"></i></li>
-    <li class="list-group-item flex-fill to-1" ><i class="fas fa-angle-left"></i></li>
-    <li class="list-group-item flex-fill"><span id="tango-number">1</span></li>
-    <li class="list-group-item flex-fill to+1"><i class="fas fa-angle-right"></i></li>
-    <li class="list-group-item flex-fill to+10"><i class="fas fa-angle-double-right"></i></li>
+    <li class="round list-group-item flex-fill to-10 c-small"><i class="fas fa-angle-double-left"></i></li>
+    <li class="round list-group-item flex-fill to-1 c-small" ><i class="fas fa-angle-left"></i></li>
+    <li class="round list-group-item flex-fill"><span id="tango-number">1</span></li>
+    <li class="round list-group-item flex-fill to+1 c-small"><i class="fas fa-angle-right"></i></li>
+    <li class="round list-group-item flex-fill to+10 c-small"><i class="fas fa-angle-double-right"></i></li>
   </ul>
 </div>
-<div id="show-tangos"> <i class="fa fa-book-open"></i> </div>
+<div id="show-tangos"> 
+  <% if @current_user == @user %>
+    <i class="fa fa-book-open"></i>
+  <% end %>
+</div>
 <div id="questions" class="hidden">
   <%= form_with model: @tangos, id: "delete-btn", method: :delete,url: delete_checked_tangos_on_wordnote_path(user_id: @current_user, wordnote_id: @wordnote) do |f| %>
     <%= f.submit "削除", class: "delete-btn btn-danger" %>
