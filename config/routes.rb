@@ -11,14 +11,15 @@ Rails.application.routes.draw do
   resources :users, shallow: true do
     get :search , on: :collection
     get :suspend, on: :member
-    resources :wordnotes, only: [:show], shallow: false
+    resources :wordnotes, only: [:show], shallow: false do
+      post 'download_csv' , to: 'wordnotes#download_csv'
+      post 'upload_csv' , to: 'wordnotes#upload_csv'
+    end
     resources :wordnotes, except: [:index, :new, :edit, :show] do
       resources :tangos, only: [:create, :update, :destroy] do
         post 'change_tango_data', to: 'tango_data#change', as: 'change_data_of', on: :member
         get 'get_tango_data', to: 'tango_data#get_tango_data', as: 'get_data_of', on: :member
       end
-      post 'download_csv' , to: 'wordnotes#download_csv'
-      post 'upload_csv' , to: 'wordnotes#upload_csv'
       delete 'delete_checked_tangos', to: 'tangos#delete_checked_tangos', as: 'delete_checked_tangos_on', on: :member
       post 'create_on_list', to: 'tangos#create_on_list', as: 'create_tangos_on_list_of', on: :member
     end

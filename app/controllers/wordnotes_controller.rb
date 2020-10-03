@@ -56,26 +56,29 @@ class WordnotesController < Base
   end
 
   def download_csv
+    #本人以外がDLできるかは後で設定
     @user = User.find(params[:user_id])
     @wordnote = @user.wordnotes.find(params[:wordnote_id])
+    explain_str = "#このファイルをアップロードする場合、IDが一致している単語はその単語を修正します。\nanswerとquestionの組み合わせがすでに存在する単語ペアはアップロードされません。"
     dl_data = CSV.generate do |csv|
-      csv <<  %w(id question answer hint)
-      @wordnote.tangos.all.order(id: :asc).each do |tango|
+      csv <<  ["id", "question", "answer", "hint", explain_str]
+      @wordnote.tangos.each do |tango|
         csv << [ tango.id, tango.question, tango.answer, tango.hint ]
       end
     end
-    send_data(dl_data, filename: "s.csv")
-
+    send_data(dl_data, filename: "#{@wordnote.name + "-" + @wordnote.subject}.csv")
   end
   
   def upload_csv
     wordnote = @current_user.wordnotes.find(params[:wordnote_id])
     tangos = wordnote.tangos.all
     current_tangos_count = tangos.count
+
     new_tangos = []
     update_tangos = []
     id_dup_check = []
     now = Time.current
+
     CSV.foreach(params[:csv_file].path, headers: true, encoding: "utf-8") do |row|
       new_tangos << {id: row["id"].to_i, wordnote_id: wordnote.id, answer: row["answer"], question: row["question"], hint: row["hint"], created_at: now, updated_at: now}
     end
@@ -92,13 +95,12 @@ class WordnotesController < Base
           end
           break
         elsif old_tango.answer == new_tango[:answer] \
-            && old_tango.question == new_tango[:question] \
-            && old_tango.hint == new_tango[:hint]
+            && old_tango.question == new_tango[:question]
           delete_flag = true
           break
         end
       end
-      delete_flag
+      delete_flag 
     end
     new_tangos.map{|t| t.delete(:id) }
     id_dup_flag = true if (id_dup_check.count - id_dup_check.uniq.count) > 0

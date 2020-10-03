@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :set_turbolinks_header
+
   def set_turbolinks_header
    response.set_header('Turbolinks-Location', request.fullpath)
   end
+
   private def classify_tangos(tangos)
     classified_tangos = {}
     tangos.each do |tango|
