@@ -55,26 +55,30 @@ jQuery.playWordnote = function(){
 
   //// auto-btn ( timer )
   let questionInterval ;
-  if(interval > 0 ){ runTimer(interval);}
+  let displayInterval;
+  let displayCounter = 3;
+  if(interval > 0){ 
+    runTimer(interval);
+    displayCounter = interval;
+  }
   controlTimer();
 
   function runTimer(interval){
     $('#auto-btn').addClass('auto-on').html(`<i class="fa fa-stop"></i> (${interval})`);
-    cnt = interval;
-    displayTimer = setInterval(function(){
-      cnt--;
-      $('#auto-btn').addClass('auto-on').html(`(${cnt})`);
-    },1000);
-    questionInterval = setInterval(function(){
+    questionInterval = setInterval(function(){ //順番重要
       changeTangoStatus();
-      clearInterval(displayTimer);
-      cnt = interval;
+      displayCounter = interval + 1;
     },interval * 1000);
+    displayInterval = setInterval(function(){ //順番重要
+      displayCounter--;
+      $('#auto-btn').addClass('auto-on').html(`<i class="fa fa-stop"></i> (${displayCounter})`);
+    },1000);
   };
 
   function stopTimer(){
-    clearInterval(questionInterval);
-    clearInterval(displayTimer);
+    clearInterval(displayInterval); //順番重要
+    clearInterval(questionInterval); //順番重要
+    displayCounter = interval;
     $('#auto-btn').removeClass('auto-on').html(`<i class="fa fa-play"></i> play`);
   };
 

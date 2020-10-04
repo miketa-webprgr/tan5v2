@@ -7,7 +7,7 @@ class WordnotesController < Base
     @user = User.find(params[:user_id])
     @wordnote = @user.wordnotes.find(params[:id])
     @tango_config = @current_user.tango_config.find_by(wordnote_id: params[:id])
-    @tango_config = @current_user.tango_config.build(wordnote_id: params[:id],font_size: 20,filter: 0 ) if @tango_config == nil
+    @tango_config = @current_user.tango_config.build(wordnote_id: params[:id],font_size: 32,filter: 0 ) if @tango_config == nil
     @tango_config.clicked_num += 1
     @tango_config.save
 
@@ -22,10 +22,8 @@ class WordnotesController < Base
 
     @tangos = @tangos.reject do |tango|
       star = 0
-      if tango.tango_datum.first # tango has_one tango_datum に変更すべし
-        star = tango.tango_datum.first.star 
-        star < @tango_config.filter.to_i
-      end
+      star = tango.tango_datum.first.star if tango.tango_datum.first # tango has_one tango_datum に変更すべし
+      star < @tango_config.filter.to_i
     end
 
     if @tangos.size == 0
@@ -59,7 +57,7 @@ class WordnotesController < Base
     #本人以外がDLできるかは後で設定
     @user = User.find(params[:user_id])
     @wordnote = @user.wordnotes.find(params[:wordnote_id])
-    explain_str = "#このファイルをアップロードする場合、IDが一致している単語はその単語を修正します。\nanswerとquestionの組み合わせがすでに存在する単語ペアはアップロードされません。"
+    explain_str = "#このファイルをアップロードする場合、IDが一致している単語はその単語を修正します。answerとquestionの組み合わせがすでに存在する単語ペアはアップロードされません。この行は削除しないでください。"
     dl_data = CSV.generate do |csv|
       csv <<  ["id", "question", "answer", "hint", explain_str]
       @wordnote.tangos.each do |tango|
@@ -100,7 +98,7 @@ class WordnotesController < Base
           break
         end
       end
-      delete_flag 
+      delete_flag  #ここがtrueなら削除
     end
     new_tangos.map{|t| t.delete(:id) }
     id_dup_flag = true if (id_dup_check.count - id_dup_check.uniq.count) > 0
