@@ -20,7 +20,10 @@ class TangosController < Base
     @user = User.find(params[:user_id])
     @wordnote = @user.wordnotes.find(params[:wordnote_id])
     @tango = @wordnote.tangos.new(tango_params)
-    if @tango.save
+    unless tango_params[:question] == "" || tango_params[:answer] == ""
+      @tango.save
+    else
+      render action: "create_on_list_error"
     end
   end
 
@@ -28,8 +31,7 @@ class TangosController < Base
    @user = User.find(params[:user_id])
    @tango = @user.wordnotes.find(params[:wordnote_id]).tangos.new(tango_params)
    @wordnotes = @user.wordnotes.all
-   if @tango.save
-   end
+   @tango.save
   end  
 
   def destroy

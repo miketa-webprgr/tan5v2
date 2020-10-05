@@ -1,0 +1,15 @@
+$(function(){
+  if (false === <%= @file_size_error.nil? %> ){
+    alert("ファイルサイズは500KB以下にしてください");
+  }else if(false === <%= @no_file_error.nil? %>){
+    alert("CSVファイルを添付してください");
+  }else if(false === <%= @error.nil? %>){
+    alert("<%= @error %>" + "\n" + "answerかquestionに空欄、又はいずれかの欄に改行が含まれています。");
+  }else{
+    document.getElementsByClassName('close-btn')[0].click();
+    $('#flash-message').html('<span class="alert alert-success">単語を登録しました</span>').hide().slideDown(500);
+    $(function(){
+      setTimeout("$('.alert.alert-success').fadeOut('slow')", 2000);
+    });
+  }
+});

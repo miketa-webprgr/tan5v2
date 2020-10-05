@@ -1,0 +1,4 @@
+$(function(){
+  $('[id="favorite-delete-no-<%= @wordnote_id %>"]').parent().parent().remove();
+  $('[id="favorite-no-<%= @wordnote_id %>"]').children().removeClass("favorited");
+});

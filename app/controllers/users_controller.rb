@@ -22,11 +22,11 @@ class UsersController < Base
 
   def create 
     @user = User.new(user_params)
-    if @user.save!
+    if @user.save
       flash[:success] = "ユーザーを登録しました"
       redirect_to :root
     else
-      flash[:danger].now = "入力内容に誤りがあります"
+      flash.now[:danger] = @user.errors.messages.to_a.join("")
       render action: "new"
     end
   end
@@ -35,12 +35,13 @@ class UsersController < Base
     @user = current_user
     @user = User.find_by(id: params[:id]) if @current_user.admin?
     @user.assign_attributes(user_params)
-    if @user.save!
+    if @user.save
       flash[:success] = "登録情報を更新しました"
       redirect_to user_path(@user)
     else
-      flash[:danger].now = "入力内容に誤りがあります"
+      flash.now[:danger] = @user.errors.messages.to_a.join("")
       render action: "new"
+      p @user.errors
     end
   end
 

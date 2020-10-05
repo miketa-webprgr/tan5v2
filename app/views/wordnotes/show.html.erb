@@ -73,12 +73,13 @@
   </table>
 </div>
 
-
-<%= javascript_include_tag "shared/learn_config" %>
-<%= javascript_include_tag "wordnotes/show/highlight_stars" %>
-<%= javascript_include_tag "wordnotes/show/play_wordnote" %>
-<script>
-  jQuery(function(){ $.playWordnote();});
-  jQuery(function(){ $.learnConfig();});
-  jQuery(function(){ $.highlightStars();});
-</script>
+<div class="js-zone">
+  <%= javascript_include_tag "shared/learn_config" %>
+  <%= javascript_include_tag "wordnotes/show/highlight_stars" %>
+  <%= javascript_include_tag "wordnotes/show/play_wordnote" %>
+  <script>
+    jQuery(function(){ $.playWordnote();});
+    jQuery(function(){ $.learnConfig();});
+    jQuery(function(){ $.highlightStars();});
+  </script>
+</div>
