@@ -7,7 +7,9 @@
       <th> 単語数 </th>
       <th> 設定 </th>
       <th> 作者 </th>
-      <th> 削除 </th>
+      <% if @user.id == current_user.id %>
+        <th> 削除 </th>
+      <% end %>
     </tr>
     <% favorite_wordnotes.each do |wordnote| %>
       <% if wordnote.is_open == true || @user.id == wordnote.user_id %>
@@ -20,16 +22,18 @@
           <%= render partial: "tango_configs/hidden_tags", locals: {wordnote: wordnote} %>
         </td>
         <td> <%= link_to wordnote.user.name, user_url(id: wordnote.user_id)  %> </td>
-        <td>
-          <%= form_with model: Favorite ,url: change_favorite_path, id: 'favorite-delete-no-' + wordnote.id.to_s, data: {confirm: '本当に削除しますか？'} do |f| %>
-            <%= f.hidden_field :user_id, value: wordnote.user_id %>
-            <%= f.hidden_field :wordnote_id, value: wordnote.id %>
-            <%= f.hidden_field :current_user_id, value: current_user.id %>
-            <%= button_tag type: "submit", class: "brn", style: "border-style: none;" do %>
-              <i class="fa fa-trash"></i>
+        <% if @user.id == current_user.id %>
+          <td>
+            <%= form_with model: Favorite ,url: change_favorite_path, id: 'favorite-delete-no-' + wordnote.id.to_s, data: {confirm: '本当に削除しますか？'} do |f| %>
+              <%= f.hidden_field :user_id, value: wordnote.user_id %>
+              <%= f.hidden_field :wordnote_id, value: wordnote.id %>
+              <%= f.hidden_field :current_user_id, value: current_user.id %>
+              <%= button_tag type: "submit", class: "btn" do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
             <% end %>
-          <% end %>
-        </td>
+          </td>
+        <% end %>
       </tr>
       <% end %>
     <% end %>
