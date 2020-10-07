@@ -4,7 +4,23 @@
 }
 #top-img p {
   font-weight: bold;
-  font-size: 60px;
+  font-size: 20px;
+  color: white;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin: 0 auto;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+#top-img h2 {
+  font-weight: bold;
+  font-size: 80px;
   color: white;
   position: absolute;
   top: 50%;
@@ -43,3 +59,16 @@
   border-radius: 20px;
 }
 .featured-item p{ padding: 15px;}
+
+.how-to-use {
+  padding: 20px;
+  background: aliceblue;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  h3 { padding: 5px;}
+  p { padding: 10px;}
+}
+
+.how-to-use:nth-child(even){
+  background: white;
+}
