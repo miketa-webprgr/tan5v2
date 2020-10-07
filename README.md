@@ -19,7 +19,7 @@ CSVでのダウンロード、アップロードも可能です。
 ## 使い方
 ```
 $ git clone git@github.com:itsuki-n22/tan5v2.git
-$ cd hoge
+$ cd tan5v2
 $ bundle install
 $ rails db:create
 $ rails db:migrate
