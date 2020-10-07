@@ -1,26 +1,27 @@
-# README
 
-I will delete : config/initializers/action_view.rb, config/initalizers/action_controller.rb
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<h1>tan5</h1>
 
-Things you may want to cover:
+##  URL
 
-* Ruby version
+### **https://tan5.herokuapp.com/**  
 
-* System dependencies
+##  説明
 
-* Configuration
+ウェブ上で単語帳を作成したり、共有ができます。
+単語帳を利用する上でシンプルな機能が実装されています。
+CSVでのダウンロード、アップロードも可能です。
 
-* Database creation
+##  使用例
 
-* Database initialization
+![tan5 demo](https://i.gyazo.com/5ad3d9c19352801a783233acb7e62cf6.gif)
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使い方
+```
+$ git clone git@github.com:itsuki-n22/tan5v2.git
+$ cd hoge
+$ bundle install
+$ rails db:create
+$ rails db:migrate
+$ rails s
+```
