@@ -69,7 +69,7 @@ class WordnotesController < Base
   
   def upload_csv
     return @no_file_error = true if params[:csv_file] == nil
-    return @file_size_error = true if params[:csv_file].size > 5000000
+    return @file_size_error = true if params[:csv_file].size > 500000
 
     wordnote = @current_user.wordnotes.find(params[:wordnote_id])
     @tangos = wordnote.tangos.all

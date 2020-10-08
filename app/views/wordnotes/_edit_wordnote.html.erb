@@ -20,10 +20,11 @@
       <div>
         <%= link_to "CSV ダウンロード", user_wordnote_download_csv_path(user_id:0, wordnote_id:0), class: 'download-csv', method: "post" %>
       </div>
-      <div>
+      <div class="pb-3 small">
+        <p>アップロードについて：ファイルサイズは500kBまでのCSV、文字コードはUTF-8でフォーマットは上のCSV ダウンロードからダウンロードして利用してください。 </p>
         <%= form_tag user_wordnote_upload_csv_path(user_id:0, wordnote_id:0), class:'upload-csv', method: "post", multipart: true, remote: true do %>
           <%= file_field_tag :csv_file, accept: '.csv' %>
-          <%= submit_tag "CSV アップロード" %>
+          <%= submit_tag "CSV アップロード", class: 'btn btn-primary' %>
         <% end %>
       </div>
   
