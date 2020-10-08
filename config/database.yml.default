@@ -23,8 +23,8 @@ default: &default
   host: localhost
   #username: postgres
   #password: postgres
-  username: itsuki
-  password: motoyama
+  username: 
+  password:
 
 development:
   <<: *default
