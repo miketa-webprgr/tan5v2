@@ -27,7 +27,6 @@
             <%= form_with model: Favorite ,url: change_favorite_path, id: 'favorite-delete-no-' + wordnote.id.to_s, data: {confirm: '本当に削除しますか？'} do |f| %>
               <%= f.hidden_field :user_id, value: wordnote.user_id %>
               <%= f.hidden_field :wordnote_id, value: wordnote.id %>
-              <%= f.hidden_field :current_user_id, value: current_user.id %>
               <%= button_tag type: "submit", class: "btn" do %>
                 <i class="fa fa-trash"></i>
               <% end %>
