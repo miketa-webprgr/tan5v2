@@ -57,6 +57,7 @@ group :development do
   gem 'binding_of_callers'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'rails-erd'
 end
 
 group :test do
