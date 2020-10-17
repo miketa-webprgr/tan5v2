@@ -11,14 +11,17 @@ class WordnotesController < Base
     @tango_config.clicked_num += 1
     @tango_config.save
 
-    case @tango_config.sort
-    when "desc"
-      @tangos = @wordnote.tangos.desc_with_datum
-    when "random"
-      @tangos = @wordnote.tangos.random_with_datum
-    else 
-      @tangos = @wordnote.tangos.asc_with_datum
-    end
+    # コメントアウトした場所を上書きした
+    @tangos = @tango_config.sort_by_setting
+
+    # case @tango_config.sort
+    # when "desc"
+    #   @tangos = @wordnote.tangos.desc_with_datum
+    # when "random"
+    #   @tangos = @wordnote.tangos.random_with_datum
+    # else 
+    #   @tangos = @wordnote.tangos.asc_with_datum
+    # end
 
     @tangos = @tangos.reject do |tango|
       star = 0
